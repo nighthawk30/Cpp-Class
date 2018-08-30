@@ -14,9 +14,10 @@ int main()
 {
   bool playagain = true;
   char playInput = ' ';
+  //main play loop
   while (playagain)
     {
-      playagain = false;
+      playagain = false;//game start
       cout << endl;
       cout << "---------------------------" << endl;
       cout << "  This is a guessing game  " << endl;
@@ -24,18 +25,18 @@ int main()
       srand(time(NULL));
       //float rnd =  rand();
       //cout << rnd << endl;
-      int randint =  100 * (rand() / float(RAND_MAX));
+      int randint =  100 * (rand() / float(RAND_MAX));//creates a random number
       int input = 0;
       int guesses = 0;
       bool correct = false;
-      
+      //guessing loop
       while (!correct)
 	{
 	  input = 0;
 	  cout << endl;
 	  cout << "Guess a number: ";
 	  cin >> input;
-
+	  //game logic
 	  if (input - randint > .1)
 	    {
 	      cout << "Too High" << endl;
@@ -61,6 +62,7 @@ int main()
 	      correct = true;
 	    }
 	}
+      //replay logic
       cout << endl;
       cout << "Do you want to play again? (y/n): ";
       cin >> playInput;
