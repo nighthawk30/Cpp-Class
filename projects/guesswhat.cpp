@@ -5,6 +5,8 @@ C++ Guessing Game
 */
 
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
@@ -19,11 +21,14 @@ int main()
       cout << "---------------------------" << endl;
       cout << "  This is a guessing game  " << endl;
       cout << "---------------------------" << endl;
-      int randint = 0;
+      srand(time(NULL));
+      //float rnd =  rand();
+      //cout << rnd << endl;
+      int randint =  100 * (rand() / float(RAND_MAX));
       int input = 0;
       int guesses = 0;
       bool correct = false;
-      //cout << srand(time(NULL)) << endl;
+      
       while (!correct)
 	{
 	  input = 0;
@@ -31,12 +36,12 @@ int main()
 	  cout << "Guess a number: ";
 	  cin >> input;
 
-	  if (input > randint)
+	  if (input - randint > .1)
 	    {
 	      cout << "Too High" << endl;
 	      guesses++;
 	    }
-	  else if (input < randint)
+	  else if (input - randint < -.1)
 	    {
 	      cout << "Too Low" << endl;
 	      guesses++;
