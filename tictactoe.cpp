@@ -16,30 +16,113 @@ c - - -
 void printBoard(char board[][3], int p1, int p2, int turn);
 bool checkWin(char board[][3], int turn);
 void getMove(char move[3]);
+void makeMove(char move[3], char board[][3], int turn);
 
 using namespace std;
 
 int main()
 {
+  //setup
   char board[3][3] = {};
-  char move[2];
+  char move[3];
   int p1wins = 0;
   int p2wins = 0;
-  int turn = 0;
-  for (int i = 0; i < 3; i++)
+  int turn = 1;
+  bool playagain = true;
+  char ask;//for play again query
+
+  //play loop
+  while (playagain)
     {
-      for (int j = 0; j < 3; j++)
+      playagain = false;
+      ask = '-';
+      cout << endl << endl;
+      for (int i = 0; i < 3; i++)
 	{
-	  board[i][j] = '-';
+	  for (int j = 0; j < 3; j++)
+	    {
+	      board[i][j] = '-';
+	    }
+	}
+      //game loop
+      while (!checkWin(board, turn))
+	{
+	  if (turn == 1)
+	    {
+	      turn = 0;
+	    }
+	  else
+	    {
+	      turn = 1;
+	    }
+	  
+	  printBoard(board, p1wins, p2wins, turn);
+	  getMove(move);
+	  if (move[0] == 'q')
+	    {
+	      break;
+	    }
+	  makeMove(move, board, turn);
+	}
+  
+      //winner
+      printBoard(board, 0, 0, turn);
+      if (turn == 0)
+	{
+	  cout << endl << "Player 1 Wins!";
+	  p1wins++;
+	}
+      else
+	{
+	  cout << endl << "Player 2 Wins!";
+	  p2wins++;
+	}
+
+      //play again query
+      cout << endl << "Would you like to keep playing? ";
+
+      cin << ask;
+      //cin.get(ask, sizeof(ask));
+      //cin.get();
+      cout << "Ask: " << ask;
+      if (ask == 'y')
+	{
+	  playagain = true;
 	}
     }
-  printBoard(board, p1wins, p2wins, turn);
-  getMove(move);
-  cout << move;
+  
   return 0;
 }
 
-void getMove(char move[2])
+void makeMove(char move[3], char board[][3], int turn)
+{
+  //2a
+  char player = ' ';
+  int column = move[0] - 48;
+  int row = move[1] - 97;
+  //cout << "Row: " << row << "  Column: " << column << endl;
+  if (turn == 0)
+    {
+      player = 'x';
+    }
+  else
+    {
+      player = 'o';
+    }
+
+  //cout << "Location: " << board[row][column] << endl;
+  if (board[row][column] == '-')
+    {
+      board[row][column] = player;
+    }
+  else
+    {
+      cout << endl << "Not a Legal Move." << endl;
+    }
+  return;
+}
+
+void getMove(char move[3])
 {
   char input[3];
   cout << endl << "Move: ";
@@ -48,6 +131,35 @@ void getMove(char move[2])
   strcpy (move,input);
   return;
 }
+
+
+//prints out the board and game state to the console
+void printBoard(char board[][3], int p1, int p2, int turn)
+{
+  cout << endl << "Player 1: " << p1 << "   Player 2: " << p2 << endl;
+  cout << "Turn: ";
+  if (turn == 0)
+    {
+      cout << "Player 1" << endl << endl;
+    }
+  else
+    {
+      cout << "Player 2" << endl << endl;
+    }
+  cout << "  0 1 2" << endl;
+  for (int i = 0; i < 3; i++)
+    {
+      cout << (char)('a' + i);
+      for (int j = 0; j < 3; j++)
+	{
+	  cout << " " << board[i][j];
+	}
+      cout << endl;
+    }
+  return;
+}
+
+
 
 //checks if a player has made a winning move
 bool checkWin(char board[][3], int turn)
@@ -132,28 +244,3 @@ bool checkWin(char board[][3], int turn)
   return win;
 }
 
-//prints out the board and game state to the console
-void printBoard(char board[][3], int p1, int p2, int turn)
-{
-  cout << endl << "Player 1: " << p1 << "   Player 2: " << p2 << endl;
-  cout << "Turn: ";
-  if (turn == 0)
-    {
-      cout << "Player 1" << endl << endl;
-    }
-  else
-    {
-      cout << "Player 2" << endl << endl;
-    }
-  cout << "  0 1 2" << endl;
-  for (int i = 0; i < 3; i++)
-    {
-      cout << (char)('a' + i) << " ";
-      for (int j = 0; j < 3; j++)
-	{
-	  cout << board[i][j] << " ";
-	}
-      cout << endl;
-    }
-  return;
-}
