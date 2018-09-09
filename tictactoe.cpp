@@ -17,6 +17,7 @@ void printBoard(char board[][3], int p1, int p2, int turn);
 bool checkWin(char board[][3], int turn);
 void getMove(char move[3]);
 void makeMove(char move[3], char board[][3], int turn);
+bool replay();
 
 using namespace std;
 
@@ -28,15 +29,13 @@ int main()
   int p1wins = 0;
   int p2wins = 0;
   int turn = 1;
-  bool playagain = true;
-  char ask;//for play again query
-
+  int game = 0;//games played
+  
   //play loop
-  while (playagain)
+  while (game == 0 || replay())
     {
-      playagain = false;
-      ask = '-';
-      cout << endl << endl;
+      game++;
+      cout << endl;
       for (int i = 0; i < 3; i++)
 	{
 	  for (int j = 0; j < 3; j++)
@@ -44,10 +43,11 @@ int main()
 	      board[i][j] = '-';
 	    }
 	}
+      
       //game loop
       while (!checkWin(board, turn))
 	{
-	  if (turn == 1)
+	  if (turn > 0)
 	    {
 	      turn = 0;
 	    }
@@ -60,38 +60,43 @@ int main()
 	  getMove(move);
 	  if (move[0] == 'q')
 	    {
+	      turn = 2;
 	      break;
 	    }
 	  makeMove(move, board, turn);
 	}
   
       //winner
-      printBoard(board, 0, 0, turn);
       if (turn == 0)
 	{
+	  printBoard(board, ++p1wins, p2wins, 2);
 	  cout << endl << "Player 1 Wins!";
-	  p1wins++;
+	}
+      else if (turn == 1)
+	{
+	  printBoard(board, p1wins, ++p2wins, 2);
+	  cout << endl << "Player 2 Wins!";
 	}
       else
 	{
-	  cout << endl << "Player 2 Wins!";
-	  p2wins++;
-	}
-
-      //play again query
-      cout << endl << "Would you like to keep playing? ";
-
-      cin << ask;
-      //cin.get(ask, sizeof(ask));
-      //cin.get();
-      cout << "Ask: " << ask;
-      if (ask == 'y')
-	{
-	  playagain = true;
+	  cout << endl << "It's a Tie!";
 	}
     }
-  
   return 0;
+}
+
+//play again query
+bool replay()
+{
+  char ask;
+  cout << endl << "Would you like to keep playing? ";
+  cin >> ask;
+  //cout << "Ask: " << ask;
+  if (ask == 'y')
+    {
+      return true;
+    }
+  return false;
 }
 
 void makeMove(char move[3], char board[][3], int turn)
@@ -142,9 +147,13 @@ void printBoard(char board[][3], int p1, int p2, int turn)
     {
       cout << "Player 1" << endl << endl;
     }
-  else
+  else if (turn == 1)
     {
       cout << "Player 2" << endl << endl;
+    }
+  else
+    {
+      cout << "-" << endl << endl;
     }
   cout << "  0 1 2" << endl;
   for (int i = 0; i < 3; i++)
