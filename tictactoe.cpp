@@ -34,6 +34,7 @@ int main()
   //play loop
   while (game == 0 || replay())
     {
+      int moves = 0;
       game++;
       cout << endl;
       for (int i = 0; i < 3; i++)
@@ -47,6 +48,13 @@ int main()
       //game loop
       while (!checkWin(board, turn))
 	{
+	  //tie checker
+	  if(moves >= 9)
+	    {
+	      turn = 2;
+	      break;
+	    }
+	  
 	  if (turn > 0)
 	    {
 	      turn = 0;
@@ -64,6 +72,7 @@ int main()
 	      break;
 	    }
 	  makeMove(move, board, turn);
+	  moves++;
 	}
   
       //winner
@@ -79,6 +88,7 @@ int main()
 	}
       else
 	{
+	  printBoard(board, p1wins, p2wins, 2);
 	  cout << endl << "It's a Tie!";
 	}
     }
@@ -88,11 +98,12 @@ int main()
 //play again query
 bool replay()
 {
-  char ask;
+  char ask[10];
   cout << endl << "Would you like to keep playing? ";
-  cin >> ask;
-  //cout << "Ask: " << ask;
-  if (ask == 'y')
+  cin.get(ask, sizeof(ask));
+  cin.get();
+  cout << "__________________________________";
+  if (ask[0] == 'y')
     {
       return true;
     }
