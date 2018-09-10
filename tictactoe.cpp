@@ -110,6 +110,7 @@ bool replay()
   return false;
 }
 
+//makes move on the board
 void makeMove(char move[3], char board[][3], int turn)
 {
   //2a
@@ -138,6 +139,7 @@ void makeMove(char move[3], char board[][3], int turn)
   return;
 }
 
+//gets the user input for the move
 void getMove(char move[3])
 {
   char input[3];
@@ -178,8 +180,6 @@ void printBoard(char board[][3], int p1, int p2, int turn)
     }
   return;
 }
-
-
 
 //checks if a player has made a winning move
 bool checkWin(char board[][3], int turn)
