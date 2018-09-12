@@ -15,8 +15,7 @@ c - - -
 
 void printBoard(char board[][3], int p1, int p2, int turn);
 bool checkWin(char board[][3], int turn);
-void getMove(char move[3]);
-void makeMove(char move[3], char board[][3], int turn);
+void makeMove(bool& quit, char board[][3], int turn);
 bool replay();
 
 using namespace std;
@@ -25,7 +24,7 @@ int main()
 {
   //setup
   char board[3][3] = {};
-  char move[3];
+  bool quit = false;
   int p1wins = 0;
   int p2wins = 0;
   int turn = 1;
@@ -65,13 +64,12 @@ int main()
 	    }
 	  
 	  printBoard(board, p1wins, p2wins, turn);
-	  getMove(move);
-	  if (move[0] == 'q')
+	  makeMove(quit, board, turn);
+	  if (quit)
 	    {
 	      turn = 2;
 	      break;
 	    }
-	  makeMove(move, board, turn);
 	  moves++;
 	}
   
@@ -111,13 +109,11 @@ bool replay()
 }
 
 //makes move on the board
-void makeMove(char move[3], char board[][3], int turn)
+void makeMove(bool& quit, char board[][3], int turn)
 {
-  //2a
+  //a2
   char player = ' ';
-  int column = move[0] - 48;
-  int row = move[1] - 97;
-  //cout << "Row: " << row << "  Column: " << column << endl;
+  char input[3];
   if (turn == 0)
     {
       player = 'x';
@@ -126,30 +122,32 @@ void makeMove(char move[3], char board[][3], int turn)
     {
       player = 'o';
     }
-
-  //cout << "Location: " << board[row][column] << endl;
-  if (board[row][column] == '-')
-    {
-      board[row][column] = player;
-    }
-  else
-    {
-      cout << endl << "Not a Legal Move." << endl;
-    }
-  return;
-}
-
-//gets the user input for the move
-void getMove(char move[3])
-{
-  char input[3];
+  
   cout << endl << "Move: ";
   cin.get(input, sizeof(input));
   cin.get();
-  strcpy (move,input);
+
+  if (input[0] == 'q')
+    {
+      quit = true;
+      return;
+    }
+  quit = false;
+  
+  //acceptable input check
+  while (!(input[0] <= 99 && input[0] >= 97 && input[1] >= 48 && input[1] <= 50)
+	 && board[input[0] - 97][input[1] - 48] != '-')
+    {
+      cout << endl << "Please enter a valid location (a-c)(0-2): ";
+      cin.get(input, sizeof(input));
+      cin.get();
+    }
+  
+  //set the move
+  cout << endl << "Row: " << input[0] - 97 << "  Column: " << input[1] - 48;
+  board[input[0] - 97][input[1] - 48] = player;
   return;
 }
-
 
 //prints out the board and game state to the console
 void printBoard(char board[][3], int p1, int p2, int turn)
