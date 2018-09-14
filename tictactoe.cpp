@@ -15,7 +15,8 @@ c - - -
 
 void printBoard(char board[][3], int p1, int p2, int turn);
 bool checkWin(char board[][3], int turn);
-void makeMove(bool& quit, char board[][3], int turn);
+void doMove(char board[][3], int turn, bool& quit);
+bool checkTie(char board[][3]);
 bool replay();
 
 using namespace std;
@@ -33,7 +34,6 @@ int main()
   //play loop
   while (game == 0 || replay())
     {
-      int moves = 0;
       game++;
       cout << endl;
       for (int i = 0; i < 3; i++)
@@ -48,12 +48,12 @@ int main()
       while (!checkWin(board, turn))
 	{
 	  //tie checker
-	  if(moves >= 9)
+	  if(checkTie(board))
 	    {
 	      turn = 2;
 	      break;
 	    }
-	  
+
 	  if (turn > 0)
 	    {
 	      turn = 0;
@@ -64,13 +64,14 @@ int main()
 	    }
 	  
 	  printBoard(board, p1wins, p2wins, turn);
-	  makeMove(quit, board, turn);
+	  doMove(board, turn, quit);
 	  if (quit)
 	    {
-	      turn = 2;
+	      turn = 3;
+	      quit = false;
 	      break;
 	    }
-	  moves++;
+	  //moves++;
 	}
   
       //winner
@@ -84,7 +85,7 @@ int main()
 	  printBoard(board, p1wins, ++p2wins, 2);
 	  cout << endl << "Player 2 Wins!";
 	}
-      else
+      else if (turn == 2)
 	{
 	  printBoard(board, p1wins, p2wins, 2);
 	  cout << endl << "It's a Tie!";
@@ -108,12 +109,48 @@ bool replay()
   return false;
 }
 
+void doMove(char board[][3], int turn, bool& quit)
+{
+  char input[3];
+  cout << endl << "Move: ";
+  cin.get(input, sizeof(input));
+  cin.get();
+
+  if (input[0] == 'q')
+    {
+      quit = true;
+      return;
+    }
+  
+  while (!((input[0] == 'a' || input[0] == 'b' || input[0] == 'c') &&
+	   (input[1] == '0' || input[1] == '1' || input[1] == '2') &&
+	   board[input[0] - 97][input[1] - 48] == '-'))
+    {
+      cout << endl << "Invalid Move(a-c)(0-2): ";
+      cin.get(input, sizeof(input));
+      cin.get();
+    }
+
+  if (turn == 0)
+    {
+      board[input[0] - 97][input[1] - 48] = 'x';
+    }
+  else
+    {
+      board[input[0] - 97][input[1] - 48] = 'o';
+    }
+  
+  return;
+}
+/*
 //makes move on the board
-void makeMove(bool& quit, char board[][3], int turn)
+void makeMove(bool quit, char board[][3], int turn)
 {
   //a2
   char player = ' ';
   char input[3];
+  int row = 0;
+  int column = 0;
   if (turn == 0)
     {
       player = 'x';
@@ -133,21 +170,30 @@ void makeMove(bool& quit, char board[][3], int turn)
       return;
     }
   quit = false;
-  
+
+  row = input[0] - 97;
+  column = input[1] - 48;
+  cout << "Row: " << row << "  Column: " << column << endl;
+
   //acceptable input check
-  while (!(input[0] <= 99 && input[0] >= 97 && input[1] >= 48 && input[1] <= 50)
-	 && board[input[0] - 97][input[1] - 48] != '-')
+  while ((input[0] != 'a' || input[0] != 'b' || input[0] != 'c') ||
+	 (input[1] != '0' || input[1] != '1' || input[1] != '2') ||
+	 board[row][column] != '-')
     {
       cout << endl << "Please enter a valid location (a-c)(0-2): ";
       cin.get(input, sizeof(input));
       cin.get();
+
+      row = input[0] - 97;
+      column = input[1] - 48;
+      cout << endl << "Row: " << row << "  Column: " << column << endl;
     }
-  
+
   //set the move
-  cout << endl << "Row: " << input[0] - 97 << "  Column: " << input[1] - 48;
-  board[input[0] - 97][input[1] - 48] = player;
+  board[row][column] = player;
   return;
 }
+*/
 
 //prints out the board and game state to the console
 void printBoard(char board[][3], int p1, int p2, int turn)
@@ -177,6 +223,21 @@ void printBoard(char board[][3], int p1, int p2, int turn)
       cout << endl;
     }
   return;
+}
+
+bool checkTie(char board[][3])
+{
+  for (int i = 0; i < 3; i++)
+    {
+      for (int j = 0; j < 3; j++)
+	{
+	  if (board[i][j] == '-')
+	    {
+	      return false;
+	    }
+	}
+    }
+  return true;
 }
 
 //checks if a player has made a winning move
