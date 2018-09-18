@@ -99,8 +99,7 @@ bool replay()
 {
   char ask[10];
   cout << endl << "Would you like to keep playing? ";
-  cin.get(ask, sizeof(ask));
-  cin.get();
+  cin.getline(ask, sizeof(ask));
   cout << "__________________________________";
   if (ask[0] == 'y')
     {
@@ -113,22 +112,25 @@ void doMove(char board[][3], int turn, bool& quit)
 {
   char input[3];
   cout << endl << "Move: ";
-  cin.get(input, sizeof(input));
-  cin.get();
+  cin.getline(input, sizeof(input));
 
   if (input[0] == 'q')
     {
       quit = true;
       return;
     }
-  
+
   while (!((input[0] == 'a' || input[0] == 'b' || input[0] == 'c') &&
 	   (input[1] == '0' || input[1] == '1' || input[1] == '2') &&
 	   board[input[0] - 97][input[1] - 48] == '-'))
+
+    //if (!(a0 || a1 || a2 || b0
     {
+      cout << "|" << input << "|" << endl;
       cout << endl << "Invalid Move(a-c)(0-2): ";
-      cin.get(input, sizeof(input));
-      cin.get();
+      cin.clear();
+      //cin.ignore();
+      cin.getline(input, sizeof(input));
     }
 
   if (turn == 0)
