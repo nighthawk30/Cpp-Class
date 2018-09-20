@@ -62,7 +62,8 @@ int main()
 	    {
 	      turn = 1;
 	    }
-	  
+	  cin.get();
+	  cin.clear();	  
 	  printBoard(board, p1wins, p2wins, turn);
 	  doMove(board, turn, quit);
 	  if (quit)
