@@ -4,6 +4,8 @@ Nathan Taylor
 Student info database
  */
 #include <iostream>
+#include <cstring>
+#include <vector>
 
 using namespace std;
 
@@ -22,7 +24,7 @@ struct Student
 
 int main()
 {
-  //vector <Student*>* list;
+  vector <Student*>* list = new vector <Student*>();
   int students = 0;
   char command = '-';
   //call function
@@ -30,13 +32,14 @@ int main()
   cout << "'add' - Add a new student" << endl;
   cout << "'print' - Print out the list of students and their information" << endl;
   cout << "'delete' - Delete a student by their id number" << endl;
-  cout << "'quit' - exit the program" << endl;
+  cout << "'quit' - exit the program" << endl << endl;
 
   while (command != 'q')
     {
       if (command == 'a')
 	{
 	  cout << endl << "Add Function" << endl;
+	  studentAdd();
 	}
       else if (command == 'p')
 	{
@@ -46,19 +49,46 @@ int main()
 	{
 	  cout << endl << "Delete Function" << endl;
 	}
- 
+      
+      command = '-';
       cout << "Command: ";
-      command = cin.get();
-      cin.clear();
+      cin.get(command);
+      while (cin.get() != '\n');
     }
 
     
   return 0;
 }
 
+//creates a new student and adds it to the vector
 void studentAdd()
 {
+  char input[10];
+  Student* initial = new Student;//use Student intial; to create a local student struct and Student* initial = new Student; to create a Global/pointer struct
   //vector -> student -> set
+  cout << "First Name: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  strcpy(initial -> nameFirst, input);
+
+  //Last Name
+  cout << "Last Name: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  strcpy(initial -> nameLast, input);
+  cout << "Name: " << initial -> nameLast << endl;
+
+  //ID #
+  cout << "First Name: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  int idnum = 0;
+  for (int i = 0; i < strlen(input); i++)
+    {
+
+    }
+  strcpy(initial -> nameFirst, input);
+
   return;
   //create student with given info + add it to vector of students
 }
