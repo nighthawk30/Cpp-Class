@@ -132,6 +132,7 @@ void doMove(char board[][3], int turn, bool& quit)
       cin.clear();
       //cin.ignore();
       cin.getline(input, sizeof(input));
+      while (cin.get() != '\n');
     }
 
   if (turn == 0)
