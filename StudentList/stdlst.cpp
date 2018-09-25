@@ -118,7 +118,13 @@ void studentAdd(vector <Student*>* list)
   
   //Add student to the vector
   list -> push_back(initial);
-  cout << list[0] -> GPA << endl; //vector begin
+
+
+  for (auto it = list -> cbegin(); it != list -> cend(); it++)
+    {
+      cout << it -> studentID << endl;
+    }
+
   return;
   //create student with given info + add it to vector of students
 }
