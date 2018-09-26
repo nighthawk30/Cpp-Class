@@ -7,6 +7,7 @@ Student info database
 #include <cstring>
 #include <vector>
 #include <cmath>
+#include <iterator>
 
 using namespace std;
 
@@ -20,8 +21,8 @@ struct Student
 };
 
 void studentAdd(vector <Student*>* list);
-void listPrint();
-void studentDelete();
+void listPrint(vector <Student*>* list);
+void studentDelete(vector <Student*>* list);
 
 int main()
 {
@@ -45,10 +46,12 @@ int main()
       else if (command == 'p')
 	{
 	  cout << endl << "Print Function" << endl;
+	  listPrint(list);
 	}
       else if (command == 'd')
 	{
 	  cout << endl << "Delete Function" << endl;
+	  studentDelete(list);
 	}
       
       command = '-';
@@ -113,30 +116,62 @@ void studentAdd(vector <Student*>* list)
 	  gpa += (input[i] - 48) * pow(10, power--);
 	}
     }
-  cout << gpa << endl;
+  //cout << gpa << endl;
   initial -> GPA = gpa;
   
   //Add student to the vector
   list -> push_back(initial);
 
-
-  for (auto it = list -> cbegin(); it != list -> cend(); it++)
+  /*
+  //get it out of vector for test
+  vector <Student*>::iterator it;
+  for (it = list -> begin(); it != list -> end(); it++)
     {
-      cout << it -> studentID << endl;
+      cout << (*it) -> studentID << endl;
     }
-
+  */
+  
   return;
   //create student with given info + add it to vector of students
 }
 
 //print out all students in the database along with id and gpa
-void listPrint()
+void listPrint(vector <Student*>* list)
 {
+  //get it out of vector for test
+  vector <Student*>::iterator it;
+  for (it = list -> begin(); it != list -> end(); it++)
+    {
+      cout << (*it) -> nameFirst << " " << (*it) -> nameLast << ": " << (*it) -> studentID << ", " << (*it) -> GPA << endl;
+    }
   return;
 }
 
 //use student id to delete student
-void studentDelete()
+void studentDelete(vector <Student*>* list)
 {
+  char input[10];
+  //ID #
+  cout << "ID Number: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  int idnum = 0;
+  for (int i = 0; i < strlen(input); i++)
+    {
+      idnum += (input[i] - 48) * pow(10,strlen(input) - i - 1);
+    }
+  
+  //get it out of vector for test
+  vector <Student*>::iterator it;
+  for (it = list -> begin(); it != list -> end(); it++)
+    {
+      if ((*it) -> studentID == idnum)
+	{
+	  list -> erase(it);
+	  cout << "Student Deleted" << endl;
+	  break;
+	}
+    }
+  
   return;
 }
