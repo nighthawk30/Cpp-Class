@@ -62,8 +62,7 @@ int main()
 	    {
 	      turn = 1;
 	    }
-	  cin.get();
-	  cin.clear();	  
+	  //while (cin.get() != '\n');	  
 	  printBoard(board, p1wins, p2wins, turn);
 	  doMove(board, turn, quit);
 	  if (quit)
@@ -132,7 +131,7 @@ void doMove(char board[][3], int turn, bool& quit)
       cin.clear();
       //cin.ignore();
       cin.getline(input, sizeof(input));
-      while (cin.get() != '\n');
+      //while (cin.get() != '\n');
     }
 
   if (turn == 0)
