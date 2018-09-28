@@ -65,6 +65,7 @@ int main()
 	  //while (cin.get() != '\n');	  
 	  printBoard(board, p1wins, p2wins, turn);
 	  doMove(board, turn, quit);
+	  //while (cin.get() != '\n');
 	  if (quit)
 	    {
 	      turn = 3;
@@ -110,37 +111,45 @@ bool replay()
 
 void doMove(char board[][3], int turn, bool& quit)
 {
-  char input[3];
+  char input;
+  char input1;
   cout << endl << "Move: ";
-  cin.getline(input, sizeof(input));
+  input = cin.get();
 
-  if (input[0] == 'q')
+  if (input == 'q')
     {
       quit = true;
+      cin.get();
       return;
     }
+  
+  input1 = cin.get();
+  cin.get();
+  //while (cin.get() != '\n');
 
-  while (!((input[0] == 'a' || input[0] == 'b' || input[0] == 'c') &&
-	   (input[1] == '0' || input[1] == '1' || input[1] == '2') &&
-	   board[input[0] - 97][input[1] - 48] == '-'))
+  while (!((input == 'a' || input == 'b' || input == 'c') &&
+	   (input1 == '0' || input1 == '1' || input1 == '2') &&
+	   board[input - 97][input1 - 48] == '-'))
 
     //if (!(a0 || a1 || a2 || b0
     {
       cout << "|" << input << "|" << endl;
       cout << endl << "Invalid Move(a-c)(0-2): ";
-      cin.clear();
+      
       //cin.ignore();
-      cin.getline(input, sizeof(input));
-      //while (cin.get() != '\n');
+      input = cin.get();
+      input1 = cin.get();
+      cout << input << " " << input1 << endl;
+      while (cin.get() != '\n');
     }
 
   if (turn == 0)
     {
-      board[input[0] - 97][input[1] - 48] = 'x';
+      board[input - 97][input1 - 48] = 'x';
     }
   else
     {
-      board[input[0] - 97][input[1] - 48] = 'o';
+      board[input - 97][input1 - 48] = 'o';
     }
   
   return;
