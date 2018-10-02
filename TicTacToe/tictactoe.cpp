@@ -111,45 +111,40 @@ bool replay()
 
 void doMove(char board[][3], int turn, bool& quit)
 {
-  char input;
-  char input1;
-  cout << endl << "Move: ";
-  input = cin.get();
-
-  if (input == 'q')
-    {
-      quit = true;
-      cin.get();
-      return;
-    }
+  char row = ' ';
+  char column = ' ';
   
-  input1 = cin.get();
-  cin.get();
-  //while (cin.get() != '\n');
-
-  while (!((input == 'a' || input == 'b' || input == 'c') &&
-	   (input1 == '0' || input1 == '1' || input1 == '2') &&
-	   board[input - 97][input1 - 48] == '-'))
-
-    //if (!(a0 || a1 || a2 || b0
+  while (board[row - 97][column - 48] != '-')
     {
-      cout << "|" << input << "|" << endl;
-      cout << endl << "Invalid Move(a-c)(0-2): ";
-      
-      //cin.ignore();
-      input = cin.get();
-      input1 = cin.get();
-      cout << input << " " << input1 << endl;
-      while (cin.get() != '\n');
+      while (row != 'a' && row != 'b' && row != 'c' && row != 'q')
+	{
+	  cout << endl << "Row: ";
+	  row = cin.get();
+	  cin.get();
+	}
+      if (row == 'q')
+	{
+	  quit = true;
+	  cin.get();
+	  return;
+	}
+
+      while (column != '0' && column != '1' && column != '2')
+	{
+	  cout << endl << "Column: ";
+	  column = cin.get();
+	  cin.get();
+	}
+      //while (cin.get() != '\n');
     }
 
   if (turn == 0)
     {
-      board[input - 97][input1 - 48] = 'x';
+      board[row - 97][column - 48] = 'x';
     }
   else
     {
-      board[input - 97][input1 - 48] = 'o';
+      board[row - 97][column - 48] = 'o';
     }
   
   return;
