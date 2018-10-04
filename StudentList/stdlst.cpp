@@ -8,6 +8,7 @@ Student info database
 #include <vector>
 #include <cmath>
 #include <iterator>
+#include <iomanip>
 
 using namespace std;
 
@@ -98,8 +99,8 @@ void studentAdd(vector <Student*>* list)
   cin.get(input, 10);
   while (cin.get() != '\n');
   float gpa = 0;
-  int power = 0;
-  int decimal = 0;
+  int power = strlen(input) - 1;
+  int decimal = -1;
   for (int i = 0; i < strlen(input); i++)
     {
       if (input[i] == '.')
@@ -108,7 +109,12 @@ void studentAdd(vector <Student*>* list)
 	  break;
 	}
     }
-  power = decimal - 1;
+  
+  if (decimal != -1)
+    {
+      power = decimal - 1;
+    }
+  
   for (int i = 0; i < strlen(input); i++)
     {
       if (i != decimal)
@@ -142,7 +148,7 @@ void listPrint(vector <Student*>* list)
   vector <Student*>::iterator it;
   for (it = list -> begin(); it != list -> end(); it++)
     {
-      cout << (*it) -> nameFirst << " " << (*it) -> nameLast << ": " << (*it) -> studentID << ", " << (*it) -> GPA << endl;
+      cout << (*it) -> nameFirst << " " << (*it) -> nameLast << ": " << (*it) -> studentID << ", " << setprecision(2) << fixed << (*it) -> GPA << endl;
     }
   return;
 }
@@ -168,6 +174,7 @@ void studentDelete(vector <Student*>* list)
       if ((*it) -> studentID == idnum)
 	{
 	  list -> erase(it);
+	  delete *it;
 	  cout << "Student Deleted" << endl;
 	  break;
 	}
