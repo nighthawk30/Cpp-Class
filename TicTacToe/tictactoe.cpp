@@ -113,13 +113,15 @@ void doMove(char board[][3], int turn, bool& quit)
 {
   char row = ' ';
   char column = ' ';
+  bool query = true;
   
-  while (board[row - 97][column - 48] != '-')
+  while (query)
     {
+      //while (cin.get() != '\n');
       while (row != 'a' && row != 'b' && row != 'c' && row != 'q')
 	{
 	  cout << endl << "Row: ";
-	  row = cin.get();
+	  cin >> row;
 	  cin.get();
 	}
       if (row == 'q')
@@ -131,11 +133,21 @@ void doMove(char board[][3], int turn, bool& quit)
 
       while (column != '0' && column != '1' && column != '2')
 	{
-	  cout << endl << "Column: ";
-	  column = cin.get();
+	  cout << "Column: ";
+	  cin >> column;
 	  cin.get();
 	}
-      //while (cin.get() != '\n');
+      
+      if (board[row - 97][column - 48] == '-')
+	{
+	  query = false;
+	}
+      else
+	{
+	  cout << endl << "That location is taken." << endl;
+	  row = ' ';
+	  column = ' ';
+	}
     }
 
   if (turn == 0)
