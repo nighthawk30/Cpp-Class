@@ -1,7 +1,8 @@
 #include "media.h"
 
-void media::printStuff(){
-  cout << "Stuff." << endl;
+media::media(char* ntitle)
+{
+  title = ntitle;
+  return;
 }
-
-char title[10];
+		      

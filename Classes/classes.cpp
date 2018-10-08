@@ -8,8 +8,9 @@ using namespace std;
 
 int main()
 {
-  media* thing = new media();
-  thing -> printStuff();
+  char* t = new char[10];
+  media* m = new media(t);
+  cout << thing -> printStuff();
   //media type
   //branch for each
   //add child to parent vector

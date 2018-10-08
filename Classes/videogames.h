@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class videogames
+class videogames::media
 {
  public:
   void printStuff();

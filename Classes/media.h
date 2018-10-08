@@ -5,6 +5,6 @@ using namespace std;
 class media
 {
  public:
-  void printStuff();
-  char title[10];
+  media (char *ntitle);
+  char* title;
 };

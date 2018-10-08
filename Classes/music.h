@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class music
+class music::media
 {
  public:
   void printStuff();

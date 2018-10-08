@@ -1,5 +1,5 @@
 #include "videogames.h"
 
-void media::printStuff(){
+void videogames::printStuff(){
   cout << "videogames" << endl;
 }
