@@ -2,9 +2,8 @@
 
 using namespace std;
 
-class media
+class music
 {
  public:
   void printStuff();
-  char title[10];
 };

@@ -2,9 +2,8 @@
 
 using namespace std;
 
-class media
+class videogames
 {
  public:
   void printStuff();
-  char title[10];
 };
