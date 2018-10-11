@@ -1,8 +1,12 @@
 #include <iostream>
-//#include "media.h"
+#include <vector>
+#include <cstring>
+#include <iterator>
+#include <cmath>
+#include "media.h"
 //#include "movies.h"
 //#include "videogames.h"
-//#include "music.h"
+#include "music.h"
 
 using namespace std;
 
@@ -16,7 +20,8 @@ void deleteMedia();
 int main()
 {
   //char* t = new char[10];
-  //media* m = new media(t);
+  media* m = new media(t);
+  //vector of media
   char command = '-';
   //Intro
   cout << endl << "Welcome to the Media Database!" << endl << "Commands: " << endl << endl;
@@ -88,6 +93,44 @@ void mediaTypeSplitter()
 //protocol for adding music to the database
 void addMusic()
 {
+  //input variable
+  char input[10];
+  //Music Descriptions
+  char* title = new char[10];
+  char* artist = new char[10];
+  char* publisher = new char[10];
+  //create music class
+  music* mu = new music(t);
+  
+  cout << endl << "Year: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  int year = 0;
+  for (int i = 0; i < strlen(input); i++)
+    {
+      idnum += (input[i] - 48) * pow(10, strlen(input) - i - 1);
+    }
+  
+  cout << endl << "Title: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+
+  cout << endl << "Artist: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+
+  cout << endl << "Duration(seconds): ";
+  cin.get(input, 10);
+  int duration = 0;
+  for (int i = 0; i < strlen(input); i++)
+    {
+      idnum += (input[i] - 48) * pow(10, strlen(input) - i - 1);
+    }
+  while (cin.get() != '\n');
+
+  cout << endl << "Publisher: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
   return;
 }
 //protocol for adding movies to the database
