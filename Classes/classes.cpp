@@ -3,7 +3,7 @@
 #include <cstring>
 #include <iterator>
 #include <cmath>
-#include "media.h"
+//#include "media.h"
 //#include "movies.h"
 //#include "videogames.h"
 #include "music.h"
@@ -20,7 +20,7 @@ void deleteMedia();
 int main()
 {
   //char* t = new char[10];
-  media* m = new media(t);
+  //media* m = new media(t);
   //vector of media
   char command = '-';
   //Intro
@@ -34,17 +34,17 @@ int main()
     {
       if (command == 'a')
 	{
-	  cout << "Add Function" << endl;
+	  cout << endl << "Add Function" << endl;
 	  mediaTypeSplitter();
 	}
       else if (command == 's')
 	{
-	  cout << "Search Function" << endl;
+	  cout << endl << "Search Function" << endl;
 	  searchMedia();
 	}
       else if (command == 'd')
 	{
-	  cout << "Delete Function" << endl;
+	  cout << endl << "Delete Function" << endl;
 	  deleteMedia();
 	}
 
@@ -75,7 +75,7 @@ void mediaTypeSplitter()
   if (command[1] == 'i')
     {
       cout << "Video Game Media" << endl;
-      addMusic();
+      addVideoGame();
     }
   else if (command[1] == 'o')
     {
@@ -85,7 +85,7 @@ void mediaTypeSplitter()
   else if (command[1] == 'u')
     {
       cout << "Music Media" << endl;
-      addVideoGame();
+      addMusic();
     }
   return;
 }
@@ -100,7 +100,7 @@ void addMusic()
   char* artist = new char[10];
   char* publisher = new char[10];
   //create music class
-  music* mu = new music(t);
+  
   
   cout << endl << "Year: ";
   cin.get(input, 10);
@@ -108,29 +108,42 @@ void addMusic()
   int year = 0;
   for (int i = 0; i < strlen(input); i++)
     {
-      idnum += (input[i] - 48) * pow(10, strlen(input) - i - 1);
+      year += (input[i] - 48) * pow(10, strlen(input) - i - 1);
     }
+
+  cout << "Title: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  strcpy(title, input);
   
-  cout << endl << "Title: ";
+  cout << "Artist: ";
   cin.get(input, 10);
   while (cin.get() != '\n');
-
-  cout << endl << "Artist: ";
-  cin.get(input, 10);
-  while (cin.get() != '\n');
-
-  cout << endl << "Duration(seconds): ";
+  strcpy(artist, input);
+ 
+  cout << "Duration(seconds): ";
   cin.get(input, 10);
   int duration = 0;
   for (int i = 0; i < strlen(input); i++)
     {
-      idnum += (input[i] - 48) * pow(10, strlen(input) - i - 1);
+      duration += (input[i] - 48) * pow(10, strlen(input) - i - 1);
     }
   while (cin.get() != '\n');
-
-  cout << endl << "Publisher: ";
+  
+  cout << "Publisher: ";
   cin.get(input, 10);
   while (cin.get() != '\n');
+  strcpy(publisher, input);
+
+  //create the class with the new information
+  music* nmuse = new music(title, year, duration, artist, publisher);
+
+  //print test
+  cout << endl << "Year: " << nmuse -> year << endl;
+  cout << "Title: " << nmuse -> title << endl;
+  cout << "Artist: " << nmuse -> artist << endl;
+  cout << "Duration: " << nmuse -> duration << endl;
+  cout << "Publisher: " << nmuse -> publisher << endl;
   return;
 }
 //protocol for adding movies to the database

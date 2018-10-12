@@ -2,8 +2,13 @@
 
 using namespace std;
 
-class music::media
+class music//::media
 {
  public:
-  void printStuff();
+  music (char *ntitle, int nyear, int nduration, char* nartist, char* npublisher);
+  char* title;
+  int year;
+  int duration;
+  char* artist;
+  char* publisher;
 };
