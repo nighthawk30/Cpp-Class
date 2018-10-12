@@ -1,14 +1,20 @@
+//Header Guard for redefinition
+#ifndef MUSIC_H
+#define MUSIC_H
+
 #include <iostream>
+#include "media.h"
 
 using namespace std;
 
-class music//::media
+class music : public media
 {
  public:
-  music (char *ntitle, int nyear, int nduration, char* nartist, char* npublisher);
-  char* title;
-  int year;
+  //sub class constructor
+  music (char *ntitle, int nyear, int nduration, char* nartist, char* npublisher, int ntype);
   int duration;
   char* artist;
   char* publisher;
 };
+
+#endif

@@ -3,7 +3,7 @@
 #include <cstring>
 #include <iterator>
 #include <cmath>
-//#include "media.h"
+#include "media.h"
 //#include "movies.h"
 //#include "videogames.h"
 #include "music.h"
@@ -19,7 +19,6 @@ void deleteMedia();
 
 int main()
 {
-  //char* t = new char[10];
   //media* m = new media(t);
   //vector of media
   char command = '-';
@@ -136,7 +135,7 @@ void addMusic()
   strcpy(publisher, input);
 
   //create the class with the new information
-  music* nmuse = new music(title, year, duration, artist, publisher);
+  music* nmuse = new music(title, year, duration, artist, publisher, 1);
 
   //print test
   cout << endl << "Year: " << nmuse -> year << endl;
@@ -144,6 +143,7 @@ void addMusic()
   cout << "Artist: " << nmuse -> artist << endl;
   cout << "Duration: " << nmuse -> duration << endl;
   cout << "Publisher: " << nmuse -> publisher << endl;
+  cout << "Type: " << nmuse -> type << endl;
   return;
 }
 //protocol for adding movies to the database

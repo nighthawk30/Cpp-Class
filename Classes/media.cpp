@@ -1,9 +1,13 @@
 #include "media.h"
 
-media::media(char* ntitle, int year)
+media::media(char* ntitle, int nyear, int ntype)
 {
   title = ntitle;
   year = nyear;
-  return;
+  type = ntype;
 }
 		      
+int media::getType()
+{
+  return type;
+}
