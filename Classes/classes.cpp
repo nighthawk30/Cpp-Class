@@ -10,17 +10,17 @@
 
 using namespace std;
 
-void mediaTypeSplitter();
-void addMusic();
-void addMovie();
-void addVideoGame();
-void searchMedia();
-void deleteMedia();
+void mediaTypeSplitter(vector <media*>* list);
+void addMusic(vector <media*>* list);
+void addMovie(vector <media*>* list);
+void addVideoGame(vector <media*>* list);
+void searchMedia(vector <media*>* list);
+void deleteMedia(vector <media*>* list);
 
 int main()
 {
-  //media* m = new media(t);
   //vector of media
+  vector <media*>* list = new vector <media*>();
   char command = '-';
   //Intro
   cout << endl << "Welcome to the Media Database!" << endl << "Commands: " << endl << endl;
@@ -34,17 +34,17 @@ int main()
       if (command == 'a')
 	{
 	  cout << endl << "Add Function" << endl;
-	  mediaTypeSplitter();
+	  mediaTypeSplitter(list);
 	}
       else if (command == 's')
 	{
 	  cout << endl << "Search Function" << endl;
-	  searchMedia();
+	  searchMedia(list);
 	}
       else if (command == 'd')
 	{
 	  cout << endl << "Delete Function" << endl;
-	  deleteMedia();
+	  deleteMedia(list);
 	}
 
       //input user command
@@ -57,7 +57,7 @@ int main()
 }
 
 //Determines which media the user wants to add
-void mediaTypeSplitter()
+void mediaTypeSplitter(vector <media*>* list)
 {
   char command[2];
   command[0] = '-';
@@ -74,23 +74,23 @@ void mediaTypeSplitter()
   if (command[1] == 'i')
     {
       cout << "Video Game Media" << endl;
-      addVideoGame();
+      addVideoGame(list);
     }
   else if (command[1] == 'o')
     {
       cout << "Movie Media" << endl;
-      addMovie();
+      addMovie(list);
     }
   else if (command[1] == 'u')
     {
       cout << "Music Media" << endl;
-      addMusic();
+      addMusic(list);
     }
   return;
 }
 
 //protocol for adding music to the database
-void addMusic()
+void addMusic(vector <media*>* list)
 {
   //input variable
   char input[10];
@@ -143,11 +143,15 @@ void addMusic()
   cout << "Artist: " << nmuse -> artist << endl;
   cout << "Duration: " << nmuse -> duration << endl;
   cout << "Publisher: " << nmuse -> publisher << endl;
-  cout << "Type: " << nmuse -> type << endl;
+  cout << "Type: " << nmuse -> getType() << endl;
+
+  //add it to the media vector
+  list -> push_back(nmuse);
+  
   return;
 }
 //protocol for adding movies to the database
-void addMovie()
+void addMovie(vector <media*>* list)
 {
   //input variable
   char input[10];
@@ -204,10 +208,13 @@ void addMovie()
   cout << "Rating: " << nmov -> rating << endl;
   cout << "Type: " << nmov -> type << endl;
 
+  //add it to the media vector
+  list -> push_back(nmov);
+  
   return;
 }
 //protocol for adding video games to the database
-void addVideoGame()
+void addVideoGame(vector <media*>* list)
 {
     //input variable
   char input[10];
@@ -254,15 +261,31 @@ void addVideoGame()
   cout << "Publisher: " << nvid -> publisher << endl;
   cout << "Type: " << nvid -> type << endl;
 
+  //add it to the media vector
+  list -> push_back(nvid);
+  
   return;
 }
 
 void searchMedia()
 {
+  /*
+vector <media*>::iterator it;
+for (it = list -> begin(); it != lis -> end(); it++)
+{
+    cout << (*it) -> title << endl;
+}
+   */
   return;
 }
 
 void deleteMedia()
 {
+
+  /*
+for loop:
+list -> erase(it);
+delete *it;
+   */
   return;
 }
