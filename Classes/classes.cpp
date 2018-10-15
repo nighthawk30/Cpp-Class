@@ -135,7 +135,7 @@ void addMusic()
   strcpy(publisher, input);
 
   //create the class with the new information
-  music* nmuse = new music(title, year, duration, artist, publisher, 1);
+  music* nmuse = new music(title, year, 1/*type*/, duration, artist, publisher);
 
   //print test
   cout << endl << "Year: " << nmuse -> year << endl;

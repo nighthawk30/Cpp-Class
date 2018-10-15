@@ -1,6 +1,6 @@
 #include "music.h"
 
-music::music (char* ntitle, int nyear, int nduration, char* nartist, char* npublisher, int ntype) : media (ntitle, nyear, ntype)
+music::music (char* ntitle, int nyear, int ntype, int nduration, char* nartist, char* npublisher) : media (ntitle, nyear, ntype)
 {
   duration = nduration;
   artist = nartist;
