@@ -4,8 +4,8 @@
 #include <iterator>
 #include <cmath>
 #include "media.h"
-//#include "movies.h"
-//#include "videogames.h"
+#include "movies.h"
+#include "videogames.h"
 #include "music.h"
 
 using namespace std;
@@ -149,11 +149,111 @@ void addMusic()
 //protocol for adding movies to the database
 void addMovie()
 {
+  //input variable
+  char input[10];
+  //Descriptions
+  char* title = new char[10];
+  char* director = new char[10];
+  //create class
+  
+  cout << endl << "Year: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  int year = 0;
+  for (int i = 0; i < strlen(input); i++)
+    {
+      year += (input[i] - 48) * pow(10, strlen(input) - i - 1);
+    }
+
+  cout << "Title: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  strcpy(title, input);
+  
+  cout << "Director: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  strcpy(director, input);
+ 
+  cout << "Duration(seconds): ";
+  cin.get(input, 10);
+  int duration = 0;
+  for (int i = 0; i < strlen(input); i++)
+    {
+      duration += (input[i] - 48) * pow(10, strlen(input) - i - 1);
+    }
+  while (cin.get() != '\n');
+
+  cout << "Rating(1-10): ";
+  cin.get(input, 10);
+  int rating = 0;
+  for (int i = 0; i < strlen(input); i++)
+    {
+      rating += (input[i] - 48) * pow(10, strlen(input) - i - 1);
+    }
+  while (cin.get() != '\n');
+  
+  //create the class with the new information
+  movies* nmov = new movies (title, year, 3/*type*/, director, duration, rating);
+
+  //print test
+  cout << endl << "Year: " << nmov -> year << endl;
+  cout << "Title: " << nmov -> title << endl;
+  cout << "Director: " << nmov -> director << endl;
+  cout << "Duration: " << nmov -> duration << endl;
+  cout << "Rating: " << nmov -> rating << endl;
+  cout << "Type: " << nmov -> type << endl;
+
   return;
 }
 //protocol for adding video games to the database
 void addVideoGame()
 {
+    //input variable
+  char input[10];
+  //Descriptions
+  char* title = new char[10];
+  char* publisher = new char[10];
+  //create class
+  
+  cout << endl << "Year: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  int year = 0;
+  for (int i = 0; i < strlen(input); i++)
+    {
+      year += (input[i] - 48) * pow(10, strlen(input) - i - 1);
+    }
+  
+  cout << "Title: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  strcpy(title, input);
+
+  cout << "Rating(1-10): ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  int rating = 0;
+  for (int i = 0; i < strlen(input); i++)
+    {
+      rating += (input[i] - 48) * pow(10, strlen(input) - i - 1);
+    }
+  
+  cout << "Publisher: ";
+  cin.get(input, 10);
+  while (cin.get() != '\n');
+  strcpy(publisher, input);
+
+  //create the class with the new information
+  videogames* nvid = new videogames (title, year, 2/*type*/, rating, publisher);
+
+  //print test
+  cout << endl << "Year: " << nvid -> year << endl;
+  cout << "Title: " << nvid -> title << endl;
+  cout << "Rating: " << nvid -> rating << endl;
+  cout << "Publisher: " << nvid -> publisher << endl;
+  cout << "Type: " << nvid -> type << endl;
+
   return;
 }
 

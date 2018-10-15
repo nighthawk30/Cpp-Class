@@ -11,7 +11,7 @@ class music : public media
 {
  public:
   //sub class constructor
-  music (char *ntitle, int nyear, int ntype, int nduration, char* nartist, char* npublisher);
+  music (char* ntitle, int nyear, int ntype, int nduration, char* nartist, char* npublisher);
   int duration;
   char* artist;
   char* publisher;

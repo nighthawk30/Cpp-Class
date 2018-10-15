@@ -1,5 +1,8 @@
 #include "movies.h"
 
-void movies::printStuff(){
-  cout << "Movies" << endl;
+movies::movies (char* ntitle, int nyear, int ntype, char* ndirector, int nduration, int nrating) : media (ntitle, nyear, ntype)
+{
+  director = ndirector;
+  duration = nduration;
+  rating = nrating;
 }
