@@ -16,7 +16,8 @@ void addMovie(vector <media*>* list);
 void addVideoGame(vector <media*>* list);
 void searchMedia(vector <media*>* list);
 void deleteMedia(vector <media*>* list);
-int arrayToInteger (char* inputArray);
+int arrayToInteger(char* inputArray);
+void printInfo(media* parent);
 
 int main()
 {
@@ -54,6 +55,7 @@ int main()
       cin.get(command);
       while (cin.get() != '\n');
     }
+  
   return 0;
 }
 
@@ -87,6 +89,7 @@ void mediaTypeSplitter(vector <media*>* list)
       cout << "Music Media" << endl;
       addMusic(list);
     }
+  
   return;
 }
 
@@ -100,7 +103,6 @@ void addMusic(vector <media*>* list)
   char* artist = new char[10];
   char* publisher = new char[10];
   /*create music class*/
-  
   
   cout << endl << "Year: ";
   cin.get(input, 10);
@@ -126,23 +128,14 @@ void addMusic(vector <media*>* list)
   cin.get(input, 10);
   while (cin.get() != '\n');
   strcpy(publisher, input);
-
+  
   /*create the class with the new information*/
   music* nmuse = new music(title, year, 1/*type*/, duration, artist, publisher);
 
-  /*
-  //print test
-  cout << endl << "Year: " << nmuse -> year << endl;
-  cout << "Title: " << nmuse -> title << endl;
-  cout << "Artist: " << nmuse -> artist << endl;
-  cout << "Duration: " << nmuse -> duration << endl;
-  cout << "Publisher: " << nmuse -> publisher << endl;
-  cout << "Type: " << nmuse -> getType() << endl;
-  */
-  
+  //
   //add it to the media vector
   list -> push_back(nmuse);
-  
+  //
   return;
 }
 /*protocol for adding movies to the database*/
@@ -182,20 +175,10 @@ void addMovie(vector <media*>* list)
   
   /*create the class with the new information*/
   movies* nmov = new movies (title, year, 3/*type*/, director, duration, rating);
-
-  /*
-  //print test
-  cout << endl << "Year: " << nmov -> year << endl;
-  cout << "Title: " << nmov -> title << endl;
-  cout << "Director: " << nmov -> director << endl;
-  cout << "Duration: " << nmov -> duration << endl;
-  cout << "Rating: " << nmov -> rating << endl;
-  cout << "Type: " << nmov -> type << endl;
-  */
   
   /*add it to the media vector*/
   list -> push_back(nmov);
-  
+
   return;
 }
 /*protocol for adding video games to the database*/
@@ -231,18 +214,9 @@ void addVideoGame(vector <media*>* list)
   /*create the class with the new information*/
   videogames* nvid = new videogames (title, year, 2/*type*/, rating, publisher);
 
-  /*
-  //print test
-  cout << endl << "Year: " << nvid -> year << endl;
-  cout << "Title: " << nvid -> title << endl;
-  cout << "Rating: " << nvid -> rating << endl;
-  cout << "Publisher: " << nvid -> publisher << endl;
-  cout << "Type: " << nvid -> type << endl;
-  */
-
   /*add it to the media vector*/
   list -> push_back(nvid);
-  
+
   return;
 }
 
@@ -260,13 +234,15 @@ void searchMedia(vector <media*>* list)
       cout << "Title: ";
       cin.get(input, 10);
       while (cin.get() != '\n');
-
+      //
       vector <media*>::iterator it;
-      for (it = list -> begin(); it != list -> end(); it++)
+      int i = 1;
+      for (it = list -> begin(); it != list -> end(); it++, i++)
 	{
 	  if (strcmp((*it) -> title, input))
 	    {
-
+	      cout << endl << "Source " << i << endl;
+	      printInfo(*it);
 	    }
 	}
     }
@@ -279,26 +255,27 @@ void searchMedia(vector <media*>* list)
       int year = arrayToInteger(input);
 
       vector <media*>::iterator it;
-      for (it = list -> begin(); it != list -> end(); it++)
+      int i = 1;
+      for (it = list -> begin(); it != list -> end(); it++, i++)
 	{
 	  if ((*it) -> year == year)
 	    {
-
+	      cout << endl << "Source " << i << endl;
+	      printInfo(*it);
 	    }
 	}
     }
-  
+  //
   return;
 }
 
 void deleteMedia(vector <media*>* list)
 {
-
   /*
-for loop:
-list -> erase(it);
-delete *it;
-   */
+    for loop:
+    list -> erase(it);
+    delete *it;
+  */
   return;
 }
 
@@ -310,6 +287,39 @@ int arrayToInteger (char* inputArray)
       num += (inputArray[i] - 48) * pow(10, strlen(inputArray) - i - 1);
     }
   return num;
+}
+
+void printInfo (media* parent)
+{
+  if (parent -> type == 1)/*Music Media*/
+    {
+      /*https://stackoverflow.com/questions/24851067/c-polymorphism-from-parent-class-to-child*/
+      music* child = static_cast<music*>(parent);
+      /*print out*/
+      cout << "Year: " << child -> year << endl;
+      cout << "Title: " << child -> title << endl;
+      cout << "Artist: " << child -> artist << endl;
+      cout << "Duration: " << child -> duration << endl;
+      cout << "Publisher: " << child -> publisher << endl;
+    }
+  else if (parent -> type == 2)/*Video game Media*/
+    {
+      videogames* child = static_cast<videogames*>(parent);
+      cout << "Year: " << child -> year << endl;
+      cout << "Title: " << child -> title << endl;
+      cout << "Rating: " << child -> rating << endl;
+      cout << "Publisher: " << child -> publisher << endl;
+    }
+  else if (parent -> type == 3)/*Movie Media*/
+    {
+      movies* child = static_cast<movies*>(parent);
+      cout << "Year: " << child -> year << endl;
+      cout << "Title: " << child -> title << endl;
+      cout << "Director: " << child -> director << endl;
+      cout << "Duration: " << child -> duration << endl;
+      cout << "Rating: " << child -> rating << endl;
+    }
+  return;
 }
 
   /*
