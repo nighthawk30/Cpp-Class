@@ -14,8 +14,7 @@ void mediaTypeSplitter(vector <media*>* list);
 void addMusic(vector <media*>* list);
 void addMovie(vector <media*>* list);
 void addVideoGame(vector <media*>* list);
-void searchMedia(vector <media*>* list);
-void deleteMedia(vector <media*>* list);
+void searchMedia(vector <media*>* list, bool delt);
 int arrayToInteger(char* inputArray);
 void printInfo(media* parent);
 
@@ -41,12 +40,12 @@ int main()
       else if (command == 's')
 	{
 	  cout << endl << "Search Function" << endl;
-	  searchMedia(list);
+	  searchMedia(list, false);
 	}
       else if (command == 'd')
 	{
 	  cout << endl << "Delete Function" << endl;
-	  deleteMedia(list);
+	  searchMedia(list, true);
 	}
 
       /*input user command*/
@@ -97,35 +96,35 @@ void mediaTypeSplitter(vector <media*>* list)
 void addMusic(vector <media*>* list)
 {
   /*input variable*/
-  char input[10];
+  char input[80];
   /*Music Descriptions*/
-  char* title = new char[10];
-  char* artist = new char[10];
-  char* publisher = new char[10];
+  char* title = new char[80];
+  char* artist = new char[80];
+  char* publisher = new char[80];
   /*create music class*/
   
   cout << endl << "Year: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   int year = arrayToInteger(input);
 
   cout << "Title: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   strcpy(title, input);
   
   cout << "Artist: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   strcpy(artist, input);
  
   cout << "Duration(seconds): ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   int duration = arrayToInteger(input);
   
   cout << "Publisher: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   strcpy(publisher, input);
   
@@ -142,34 +141,34 @@ void addMusic(vector <media*>* list)
 void addMovie(vector <media*>* list)
 {
   /*input variable*/
-  char input[10];
+  char input[80];
   /*Descriptions*/
-  char* title = new char[10];
-  char* director = new char[10];
+  char* title = new char[80];
+  char* director = new char[80];
   /*create class*/
   
   cout << endl << "Year: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   int year = arrayToInteger(input);;
 
   cout << "Title: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   strcpy(title, input);
   
   cout << "Director: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   strcpy(director, input);
  
   cout << "Duration(seconds): ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   int duration = arrayToInteger(input);
   
-  cout << "Rating(1-10): ";
-  cin.get(input, 10);
+  cout << "Rating(1-80): ";
+  cin.get(input, 80);
   while (cin.get() != '\n');
   int rating = arrayToInteger(input);
   
@@ -185,29 +184,29 @@ void addMovie(vector <media*>* list)
 void addVideoGame(vector <media*>* list)
 {
   /*input variable*/
-  char input[10];
+  char input[80];
   /*Descriptions*/
-  char* title = new char[10];
-  char* publisher = new char[10];
+  char* title = new char[80];
+  char* publisher = new char[80];
   /*create class*/
   
   cout << endl << "Year: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   int year = arrayToInteger(input);
   
   cout << "Title: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   strcpy(title, input);
 
-  cout << "Rating(1-10): ";
-  cin.get(input, 10);
+  cout << "Rating(1-80): ";
+  cin.get(input, 80);
   while (cin.get() != '\n');
   int rating = arrayToInteger(input);
   
   cout << "Publisher: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
   strcpy(publisher, input);
 
@@ -221,36 +220,53 @@ void addVideoGame(vector <media*>* list)
 }
 
 /*search method*/
-void searchMedia(vector <media*>* list)
+void searchMedia(vector <media*>* list, bool delt)
 {
-  char input[10];
+  char input[80];
+  bool match = false;
   cout << "Search by: ";
-  cin.get(input, 10);
+  cin.get(input, 80);
   while (cin.get() != '\n');
 
   if (input[0] == 't')
     {
       /*search by title*/
       cout << "Title: ";
-      cin.get(input, 10);
+      cin.get(input, 80);
       while (cin.get() != '\n');
       //
       vector <media*>::iterator it;
       int i = 1;
+
       for (it = list -> begin(); it != list -> end(); it++, i++)
 	{
-	  if (strcmp((*it) -> title, input))
+	  if (strcmp((*it) -> title, input) == 0)//apparently it compares ascii values by subtracting
 	    {
+	      match = true;
 	      cout << endl << "Source " << i << endl;
 	      printInfo(*it);
+	      if (delt)
+		{
+		  cout << endl << "Do you want to delete this media?: ";
+		  cin.get(input, 80);
+		  while (cin.get() != '\n');
+		  cout << "Media Deleted" << endl;
+		  if (input[0] == 'y')
+		    {
+		      list -> erase(it);
+		      delete *it;
+		      break;
+		    }
+		}
 	    }
 	}
+	
     }
   else
     {
       /*search by year*/
       cout << "Year: ";
-      cin.get(input, 10);
+      cin.get(input, 80);
       while (cin.get() != '\n');
       int year = arrayToInteger(input);
 
@@ -260,22 +276,31 @@ void searchMedia(vector <media*>* list)
 	{
 	  if ((*it) -> year == year)
 	    {
+	      match = true;
 	      cout << endl << "Source " << i << endl;
 	      printInfo(*it);
+	      if (delt)
+		{
+		  cout << endl << "Do you want to delete this media?: ";
+		  cin.get(input, 80);
+		  while (cin.get() != '\n');
+		  if (input[0] == 'y')
+		    {
+		      list -> erase(it);
+		      delete *it;
+		      break;
+		    }
+		}
 	    }
 	}
     }
-  //
-  return;
-}
-
-void deleteMedia(vector <media*>* list)
-{
-  /*
-    for loop:
-    list -> erase(it);
-    delete *it;
-  */
+  
+  //No match found
+  if (!match)
+    {
+      cout << endl << "No Match Found" << endl;
+    }
+    
   return;
 }
 
@@ -284,7 +309,7 @@ int arrayToInteger (char* inputArray)
   int num = 0;
   for (int i = 0; i < strlen(inputArray); i++)
     {
-      num += (inputArray[i] - 48) * pow(10, strlen(inputArray) - i - 1);
+      num += (inputArray[i] - 48) * pow(80, strlen(inputArray) - i - 1);
     }
   return num;
 }
@@ -293,7 +318,7 @@ void printInfo (media* parent)
 {
   if (parent -> type == 1)/*Music Media*/
     {
-      /*https://stackoverflow.com/questions/24851067/c-polymorphism-from-parent-class-to-child*/
+      /*https://stackoverflow.com/questions/24858067/c-polymorphism-from-parent-class-to-child*/
       music* child = static_cast<music*>(parent);
       /*print out*/
       cout << "Year: " << child -> year << endl;
