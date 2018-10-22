@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstring>
 #include <iterator>
+#include <cstdlib>
 #include <cmath>
 #include "media.h"
 #include "movies.h"
@@ -107,7 +108,7 @@ void addMusic(vector <media*>* list)
   cin.get(input, 80);
   while (cin.get() != '\n');
   int year = arrayToInteger(input);
-
+  
   cout << "Title: ";
   cin.get(input, 80);
   while (cin.get() != '\n');
@@ -130,11 +131,11 @@ void addMusic(vector <media*>* list)
   
   /*create the class with the new information*/
   music* nmuse = new music(title, year, 1/*type*/, duration, artist, publisher);
-
+  
   //
   //add it to the media vector
   list -> push_back(nmuse);
-  //
+  //  
   return;
 }
 /*protocol for adding movies to the database*/
@@ -223,11 +224,13 @@ void addVideoGame(vector <media*>* list)
 void searchMedia(vector <media*>* list, bool delt)
 {
   char input[80];
+  input[0] = '-';
   bool match = false;
+
   cout << "Search by: ";
   cin.get(input, 80);
   while (cin.get() != '\n');
-
+  
   if (input[0] == 't')
     {
       /*search by title*/
@@ -248,11 +251,12 @@ void searchMedia(vector <media*>* list, bool delt)
 	      if (delt)
 		{
 		  cout << endl << "Do you want to delete this media?: ";
-		  cin.get(input, 80);
+		  char yn[80];
+		  cin.get(yn, 80);
 		  while (cin.get() != '\n');
-		  cout << "Media Deleted" << endl;
-		  if (input[0] == 'y')
+		  if (yn[0] == 'y')
 		    {
+		      cout << "Media Deleted" << endl;
 		      list -> erase(it);
 		      delete *it;
 		      break;
@@ -268,7 +272,7 @@ void searchMedia(vector <media*>* list, bool delt)
       cout << "Year: ";
       cin.get(input, 80);
       while (cin.get() != '\n');
-      int year = arrayToInteger(input);
+      int year = arrayToInteger(input); //atoi
 
       vector <media*>::iterator it;
       int i = 1;
@@ -282,10 +286,12 @@ void searchMedia(vector <media*>* list, bool delt)
 	      if (delt)
 		{
 		  cout << endl << "Do you want to delete this media?: ";
-		  cin.get(input, 80);
+		  char yn[80];
+		  cin.get(yn, 80);
 		  while (cin.get() != '\n');
-		  if (input[0] == 'y')
+		  if (yn[0] == 'y')
 		    {
+		      cout << "Media Deleted" << endl;
 		      list -> erase(it);
 		      delete *it;
 		      break;
@@ -309,7 +315,7 @@ int arrayToInteger (char* inputArray)
   int num = 0;
   for (int i = 0; i < strlen(inputArray); i++)
     {
-      num += (inputArray[i] - 48) * pow(80, strlen(inputArray) - i - 1);
+      num += (inputArray[i] - 48) * pow(10, strlen(inputArray) - i - 1);
     }
   return num;
 }
