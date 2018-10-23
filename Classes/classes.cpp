@@ -23,7 +23,8 @@ int main()
 {
   /*vector of media*/
   vector <media*>* list = new vector <media*>();
-  char command = '-';
+  char* command = new char;
+  (*command) = '-';
   /*Intro*/
   cout << endl << "Welcome to the Media Database!" << endl << "Commands: " << endl << endl;
   cout << "'add' - Add a new object to the database" << endl;
@@ -31,28 +32,28 @@ int main()
   cout << "'delete' - Allows user to search for and delete specific objects in the database" << endl;
   cout << "'quit' - End the program" << endl;
 
-  while (command != 'q')
+  while (*command != 'q')
     {
-      if (command == 'a')
+      if (*command == 'a')
 	{
 	  cout << endl << "Add Function" << endl;
 	  mediaTypeSplitter(list);
 	}
-      else if (command == 's')
+      else if (*command == 's')
 	{
 	  cout << endl << "Search Function" << endl;
 	  searchMedia(list, false);
 	}
-      else if (command == 'd')
+      else if (*command == 'd')
 	{
 	  cout << endl << "Delete Function" << endl;
 	  searchMedia(list, true);
 	}
 
       /*input user command*/
-      command = '-';
+      *command = '-';
       cout << endl << "Command: ";
-      cin.get(command);
+      cin.get(*command);
       while (cin.get() != '\n');
     }
   
@@ -181,6 +182,7 @@ void addMovie(vector <media*>* list)
 
   return;
 }
+
 /*protocol for adding video games to the database*/
 void addVideoGame(vector <media*>* list)
 {
