@@ -23,8 +23,8 @@ int main()
 {
   /*vector of media*/
   vector <media*>* list = new vector <media*>();
-  char* command = new char;
-  (*command) = '-';
+  char* mainprompt = new char;
+  (*mainprompt) = '-';
   /*Intro*/
   cout << endl << "Welcome to the Media Database!" << endl << "Commands: " << endl << endl;
   cout << "'add' - Add a new object to the database" << endl;
@@ -32,31 +32,31 @@ int main()
   cout << "'delete' - Allows user to search for and delete specific objects in the database" << endl;
   cout << "'quit' - End the program" << endl;
 
-  while (*command != 'q')
+  while (*mainprompt != 'q')
     {
-      if (*command == 'a')
+      if (*mainprompt == 'a')
 	{
 	  cout << endl << "Add Function" << endl;
 	  mediaTypeSplitter(list);
 	}
-      else if (*command == 's')
+      else if (*mainprompt == 's')
 	{
 	  cout << endl << "Search Function" << endl;
 	  searchMedia(list, false);
 	}
-      else if (*command == 'd')
+      else if (*mainprompt == 'd')
 	{
 	  cout << endl << "Delete Function" << endl;
 	  searchMedia(list, true);
 	}
 
       /*input user command*/
-      *command = '-';
+      *mainprompt = '-';
       cout << endl << "Command: ";
-      cin.get(*command);
+      cin.get(*mainprompt);
       while (cin.get() != '\n');
     }
-  
+  cout << "Aborted (core dumped)\t\t\t\t-jk";
   return 0;
 }
 
@@ -225,19 +225,18 @@ void addVideoGame(vector <media*>* list)
 /*search method*/
 void searchMedia(vector <media*>* list, bool delt)
 {
-  char input[80];
-  input[0] = '-';
+  char search[80];
   bool match = false;
 
   cout << "Search by: ";
-  cin.get(input, 80);
+  cin.get(search, 80);
   while (cin.get() != '\n');
   
-  if (input[0] == 't')
+  if (search[0] == 't')
     {
       /*search by title*/
       cout << "Title: ";
-      cin.get(input, 80);
+      cin.get(search, 80);
       while (cin.get() != '\n');
       //
       vector <media*>::iterator it;
@@ -245,7 +244,7 @@ void searchMedia(vector <media*>* list, bool delt)
 
       for (it = list -> begin(); it != list -> end(); it++, i++)
 	{
-	  if (strcmp((*it) -> title, input) == 0)//apparently it compares ascii values by subtracting
+	  if (strcmp((*it) -> title, search) == 0)//apparently it compares ascii values by subtracting
 	    {
 	      match = true;
 	      cout << endl << "Source " << i << endl;
@@ -272,9 +271,9 @@ void searchMedia(vector <media*>* list, bool delt)
     {
       /*search by year*/
       cout << "Year: ";
-      cin.get(input, 80);
+      cin.get(search, 80);
       while (cin.get() != '\n');
-      int year = arrayToInteger(input); //atoi
+      int year = arrayToInteger(search); //atoi
 
       vector <media*>::iterator it;
       int i = 1;
