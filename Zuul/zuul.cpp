@@ -9,8 +9,6 @@ Text Based Maze with Items
 #include <iterator>
 #include <cstdlib>
 #include <cmath>
-#include <windows.h>
-#include <cwchar>
 
 using namespace std;
 
@@ -28,13 +26,12 @@ int main()
   //cin.get(input);
   waitEnter();
   //cin.getline()?
-  cout << "Command: ";
-  cin.getline(command,80);
+  //cout << "Command: ";
+  //cin.getline(command,80);
   addSpace(10);
+  cout << "\\" << endl;
   //cin.ignore(); if switching between cin << and get line
 
-
-  
   return 0;
 }
 
