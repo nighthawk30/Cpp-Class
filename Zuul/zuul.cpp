@@ -12,42 +12,24 @@ Text Based Maze with Items
 
 using namespace std;
 
-void addSpace(int space);
-void waitEnter();
+void input();
 
 int main()
 {
-  addSpace(100);
-  cout << endl << "\t\t\t\t\tWELCOME TO ZUUL";
-  cout << endl << "\t\t\t\t\t (Press Enter)";
-  addSpace(25);
   char* command = new char[80];
-  //cin << input;
-  //cin.get(input);
-  waitEnter();
-  //cin.getline()?
-  //cout << "Command: ";
-  //cin.getline(command,80);
-  addSpace(10);
-  cout << "\\" << endl;
   //cin.ignore(); if switching between cin << and get line
+  cout << "Entry Statement" << endl << "Commands:" << endl << endl;
+  cout << "'go' \"direction\" - Move in one of the cardinal directions" << endl;
+  cout << "'inventory' - Print out your current inventory" << endl;
+  //cout << "'open' - " << endl;
+  cout << "'drop' - " << endl;
+  cout << "'pickup' - " << endl;
 
   return 0;
 }
 
-void addSpace(int space)
+void input()
 {
-  for (int i = 0; i < space; i++)
-    {
-      cout << endl;
-    }
-  return;
-}
-
-void waitEnter()
-{
-  char* enter = new char[80];
-  cin.getline(enter, 80);
-  delete enter;
+  
   return;
 }

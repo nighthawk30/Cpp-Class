@@ -23,8 +23,8 @@ int main()
 {
   /*vector of media*/
   vector <media*>* list = new vector <media*>();
-  char* mainprompt = new char;
-  (*mainprompt) = '-';
+  char mainprompt;
+  mainprompt = '-';
   /*Intro*/
   cout << endl << "Welcome to the Media Database!" << endl << "Commands: " << endl << endl;
   cout << "'add' - Add a new object to the database" << endl;
@@ -32,31 +32,31 @@ int main()
   cout << "'delete' - Allows user to search for and delete specific objects in the database" << endl;
   cout << "'quit' - End the program" << endl;
 
-  while (*mainprompt != 'q')
+  while (mainprompt != 'q')
     {
-      if (*mainprompt == 'a')
+      if (mainprompt == 'a')
 	{
 	  cout << endl << "Add Function" << endl;
 	  mediaTypeSplitter(list);
 	}
-      else if (*mainprompt == 's')
+      else if (mainprompt == 's')
 	{
 	  cout << endl << "Search Function" << endl;
 	  searchMedia(list, false);
 	}
-      else if (*mainprompt == 'd')
+      else if (mainprompt == 'd')
 	{
 	  cout << endl << "Delete Function" << endl;
 	  searchMedia(list, true);
 	}
 
       /*input user command*/
-      *mainprompt = '-';
+      mainprompt = '-';
       cout << endl << "Command: ";
-      cin.get(*mainprompt);
+      cin.get(mainprompt);
       while (cin.get() != '\n');
     }
-  cout << "Aborted (core dumped)\t\t\t\t-jk";
+  cout << "Aborted (core dumped)\t\t\t\t-jk" << endl;
   return 0;
 }
 
