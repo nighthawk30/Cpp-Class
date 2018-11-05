@@ -9,6 +9,7 @@ Text Based Maze with Items
 #include <iterator>
 #include <cstdlib>
 #include <cmath>
+#include "room.h"
 
 using namespace std;
 
@@ -18,18 +19,26 @@ int main()
 {
   char* command = new char[80];
   //cin.ignore(); if switching between cin << and get line
-  cout << "Entry Statement" << endl << "Commands:" << endl << endl;
+  cout << "Entry Statement" << endl << endl << "Commands:" << endl;
   cout << "'go' \"direction\" - Move in one of the cardinal directions" << endl;
-  cout << "'inventory' - Print out your current inventory" << endl;
+  cout << "'inventory' - List the contents of your backpack" << endl;
   //cout << "'open' - " << endl;
-  cout << "'drop' - " << endl;
-  cout << "'pickup' - " << endl;
+  cout << "'drop (item)' - Leave an item from your backpack in the room" << endl;
+  cout << "'pickup (item)' - Take an item from the current room and put it in your backpack" << endl;
 
+  char* one = new char;
+  *one = 'a';
+  
+  char* two = new char;
+  *two = 'l';
+  
+  room* nroom = new room(one,two,4,66);
+  
+  cout << "def: " << nroom -> getDes(one);
   return 0;
 }
 
 void input()
 {
-  
   return;
 }
