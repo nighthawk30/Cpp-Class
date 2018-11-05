@@ -1,3 +1,7 @@
+/*
+Nathan Taylor
+Header File for parent class
+ */
 //Header Guard if statement for redefinition
 #ifndef MEDIA_H
 #define MEDIA_H

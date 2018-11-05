@@ -1,3 +1,8 @@
+/*
+Nathan Taylor
+11/5/2018
+Database of Media made with classes
+ */
 #include <iostream>
 #include <vector>
 #include <cstring>

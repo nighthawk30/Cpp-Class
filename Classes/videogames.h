@@ -1,3 +1,7 @@
+/*
+Nathan Taylor
+Header file for videogames class
+ */
 //Header Guard for redef
 #ifndef VIDEOGAMES_H
 #define VIDEOGAMES_H
@@ -6,7 +10,7 @@
 #include "media.h"
 
 using namespace std;
-
+//class initialization including parent
 class videogames : public media
 {
  public:

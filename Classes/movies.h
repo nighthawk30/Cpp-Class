@@ -1,3 +1,7 @@
+/*
+Nathan Taylor
+Header file for movies class
+ */
 //Header Guard for redef
 #ifndef MOVIES_H
 #define MOVIES_H

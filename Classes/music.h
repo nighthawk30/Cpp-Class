@@ -1,3 +1,7 @@
+/*
+Nathan Taylor
+Header file for the music class
+ */
 //Header Guard for redefinition
 #ifndef MUSIC_H
 #define MUSIC_H
