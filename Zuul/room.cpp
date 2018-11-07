@@ -5,17 +5,25 @@ Room Class
 
 #include "room.h"
 
-room::room(room* nkey1, char* nkey2, char* nkey3, char* nkey4, int ndes1, int ndes2, int ndes3, int ndes4)
+room::room(){};
+
+room::setDescription(char* ndescript)
 {
-  exits[nkey1] = ndes1;
-  exits[nkey2] = ndes2;
-  exits[nkey3] = ndes3;
-  exits[nkey4] = ndes4;
+  ndescript = new char[strlen(ndescript)];
+  strcpy(descript, ndescript);
 }
 
+room::setMap(char* nkey1, char* nkey2, char* nkey3, char* nkey4, room* ndestin1, room* ndestin2, room* ndestin3, room* ndestin4)
+{
+  exits[nkey1] = ndestin1;
+  exits[nkey2] = ndestin2;
+  exits[nkey3] = ndestin3;
+  exits[nkey4] = ndestin4;
+}
+/*
 room::exitToRoom(char* key)
 {
-  map<char*,int>::iterator it;
+  map<char*,room*>::iterator it;
   for (it = exits.begin(); it != exits.end(); ++it)
     {
       if (strcmp(it -> first, key) == 0)
@@ -24,8 +32,11 @@ room::exitToRoom(char* key)
 	}
     }
 }
+*/
 
+/*
 room::exitsTest(char* key)
 {
   
 }
+*/

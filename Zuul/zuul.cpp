@@ -5,8 +5,6 @@ Text Based Maze with Items
  */
 #include <iostream>
 #include <vector>
-#include <cstring>//
-#include <iterator>//
 #include <cstdlib>
 #include <cmath>
 #include "room.h"
@@ -34,12 +32,20 @@ int main()
   *two = 'l';
   */
   
-  room* nroom = new room("north","south","east","west",1,2,3,4);
+  room* r0 = new room();
+  room* r1 = new room();
+  room* r2 = new room();
+  room* r3 = new room();
+  room* r5 = new room();
 
+  r0 -> setDescription("Heyo");
+
+  /*
   char input[80];
   cout << endl << "Direction: ";
   cin.getline(input, 80);
-  if (nroom -> roomToExit(
+  */
+  cout << endl << "Description: " << r0 -> descript;
   return 0;
 }
 

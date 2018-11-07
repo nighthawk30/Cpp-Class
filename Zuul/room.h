@@ -12,8 +12,17 @@ using namespace std;
 class room
 {
  public:
+
+  //class init
   room();
-  setMap(char* nkey1, char* nkey2, char* nkey3, char* nkey4, room* ndes1, room* ndes2, room* ndes3, room* ndes4);
-  int exitToRoom(char* key);
-  map<char*,int> exits;
+
+  //function init
+  setDescription(char* ndescript);
+  setMap(char* nkey1, char* nkey2, char* nkey3, char* nkey4, room* ndestin1, room* ndestin2, room* ndestin3, room* ndestin4);
+  //room* exitToRoom(char* key);
+  
+  //variable init
+  char* descript;  
+  map<char*,room*> exits;
+
 };
