@@ -11,11 +11,12 @@ Text Based Maze with Items
 
 using namespace std;
 
-void input();
+void input(char* command);
 
 int main()
 {
   char* command = new char[80];
+
   //cin.ignore(); if switching between cin << and get line
   cout << "Entry Statement" << endl << endl << "Commands:" << endl;
   cout << "'go' \"direction\" - Move in one of the cardinal directions" << endl;
@@ -24,32 +25,34 @@ int main()
   cout << "'drop (item)' - Leave an item from your backpack in the room" << endl;
   cout << "'pickup (item)' - Take an item from the current room and put it in your backpack" << endl;
 
-  /*
-  char* one = new char;
-  *one = 'a';
-  
-  char* two = new char;
-  *two = 'l';
-  */
-  
-  room* r0 = new room();
-  room* r1 = new room();
-  room* r2 = new room();
-  room* r3 = new room();
-  room* r5 = new room();
+  //ROOM SETUP
+  //creates space on the fly for the string constant that you cannot access  
+  room* r0 = new room("heyo");
+  room* r1 = new room("hi");//can also r# -> setDescription("");
 
-  r0 -> setDescription("Heyo");
+  //ROOM MAP SETUP
+  r0 -> setExits(r1, NULL, r1, NULL, NULL, NULL);
+  r1 -> setExits(r0, NULL, NULL, r0, NULL, NULL);
+
 
   /*
   char input[80];
   cout << endl << "Direction: ";
   cin.getline(input, 80);
-  */
-  cout << endl << "Description: " << r0 -> descript;
+*/
+
+  input(command);
+  cout << command;
+  input(command);
+  cout << command;
+
+
   return 0;
 }
 
-void input()
+void input(char* command)
 {
+  cout << endl << "Command: ";
+  cin.getline(command, 80);
   return;
 }

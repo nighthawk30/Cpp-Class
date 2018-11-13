@@ -14,15 +14,16 @@ class room
  public:
 
   //class init
-  room();
+  room(char* ndescript);
 
   //function init
   setDescription(char* ndescript);
-  setMap(char* nkey1, char* nkey2, char* nkey3, char* nkey4, room* ndestin1, room* ndestin2, room* ndestin3, room* ndestin4);
+  setExits(room* ndestin1, room* ndestin2, room* ndestin3, room* ndestin4, room* ndestin5, room* ndestin6);
   //room* exitToRoom(char* key);
   
   //variable init
-  char* descript;  
-  map<char*,room*> exits;
+  char* descript;
+  room** exits;
+  //map<char*,room*> exits;
 
 };
