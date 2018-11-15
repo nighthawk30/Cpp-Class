@@ -16,7 +16,22 @@ void input(char* command);
 int main()
 {
   char* command = new char[80];
+  int size = 5;
+  char* commands[size];
+  //commands
+  char com1[2] = "go";
+  char com2[2] = "in";
+  char com3[2] = "dr";
+  char com4[2] = "pi";
+  char com5[2] = "qu";
+  //fill array
+  strcpy(commands[0], com1);
+  strcpy(commands[1], com2);
+  strcpy(commands[2], com3);
+  strcpy(commands[3], com4);
+  strcpy(commands[4], com5);
 
+  
   //cin.ignore(); if switching between cin << and get line
   cout << "Entry Statement" << endl << endl << "Commands:" << endl;
   cout << "'go' \"direction\" - Move in one of the cardinal directions" << endl;
@@ -41,18 +56,23 @@ int main()
   cin.getline(input, 80);
 */
 
-  input(command);
+  input(command, commands);
   cout << command;
-  input(command);
+  input(command, commands);
   cout << command;
 
 
   return 0;
 }
 
-void input(char* command)
+void input(char* command, char* commands, int size)
 {
   cout << endl << "Command: ";
   cin.getline(command, 80);
+
+  for (int i = 0; i < size; i++)
+    {
+      
+    }
   return;
 }
