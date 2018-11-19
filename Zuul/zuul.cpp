@@ -59,10 +59,7 @@ int main()
 */
 
   input(command);
-  cout << command;
   input(command);
-  cout << command;
-
 
   return 0;
 }
@@ -83,5 +80,19 @@ void input(char* command)
 
   char* action = new char[space+1];
   char* call = new char[strlen(command) - space];
+
+  for (int i = 0; i < strlen(command); i++)
+    {
+      if (i < space)
+	{
+	  action[i] = command[i];
+	}
+      if (i > space)
+	{
+	  call[i-space - 1] = command[i];
+	}
+    }
+
+  cout << call << endl << action << endl;
   return;
 }
