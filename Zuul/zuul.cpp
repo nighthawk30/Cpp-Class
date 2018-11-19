@@ -15,22 +15,23 @@ void input(char* command);
 
 int main()
 {
+  int size = 4;
   char* command = new char[80];
-  int size = 5;
+  /*
+  int size = 4;
+  room* current;
   char* commands[size];
   //commands
-  char com1[2] = "go";
-  char com2[2] = "in";
-  char com3[2] = "dr";
-  char com4[2] = "pi";
-  char com5[2] = "qu";
+  char com1[5] = "West";
+  char com2[5] = "East";
+  char com3[6] = "South";
+  char com4[6] = "North";
   //fill array
   strcpy(commands[0], com1);
   strcpy(commands[1], com2);
   strcpy(commands[2], com3);
   strcpy(commands[3], com4);
-  strcpy(commands[4], com5);
-
+  */
   
   //cin.ignore(); if switching between cin << and get line
   cout << "Entry Statement" << endl << endl << "Commands:" << endl;
@@ -47,8 +48,9 @@ int main()
 
   //ROOM MAP SETUP
   r0 -> setExits(r1, NULL, r1, NULL, NULL, NULL);
-  r1 -> setExits(r0, NULL, NULL, r0, NULL, NULL);
+  r1 -> setExits(r0, NULL, r0, NULL, NULL, NULL);
 
+  room* current = r0;
 
   /*
   char input[80];
@@ -56,23 +58,30 @@ int main()
   cin.getline(input, 80);
 */
 
-  input(command, commands);
+  input(command);
   cout << command;
-  input(command, commands);
+  input(command);
   cout << command;
 
 
   return 0;
 }
 
-void input(char* command, char* commands, int size)
+void input(char* command)
 {
   cout << endl << "Command: ";
   cin.getline(command, 80);
-
-  for (int i = 0; i < size; i++)
+  int space;
+  //split into multiple words
+  for (int i = 0; i < strlen(command); i++)
     {
-      
+      if (command[i] == ' ')
+	{
+	  space = i;
+	}
     }
+
+  char* action = new char[space+1];
+  char* call = new char[strlen(command) - space];
   return;
 }
