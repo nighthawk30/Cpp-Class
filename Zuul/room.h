@@ -3,9 +3,11 @@ Nathan Taylor
 Header file for room class
  */
 
-#include <map>
 #include <iterator>
 #include <cstring>
+#include <iostream>
+#include <vector>
+#include <cstdlib>
 
 using namespace std;
 
@@ -18,12 +20,14 @@ class room
 
   //function init
   setDescription(char* ndescript);
+  addStorage(char* item);
+  findStorage(char* item);
   setExits(room* ndestin1, room* ndestin2, room* ndestin3, room* ndestin4, room* ndestin5, room* ndestin6);
-  //room* exitToRoom(char* key);
   
   //variable init
+  vector <char*>* storage;
+  vector <char*>::iterator it;
   char* descript;
   room** exits;
-  //map<char*,room*> exits;
 
 };
