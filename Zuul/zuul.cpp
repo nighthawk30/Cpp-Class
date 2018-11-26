@@ -16,18 +16,14 @@ void getInventory(inventory* pack);
 void dropItemCommand(char* item, room* current, inventory* pack);
 void pickupItemCommand(char* item, room* current, inventory* pack);
 void roomCommand(room* current);
+void helpCommand();
 
 int main()
 {
   //cin.ignore(); if switching between cin << and get line
   cout << "Entry Statement" << endl << endl << "Commands:" << endl;
-  cout << "'go' \"direction\" - Move in one of the cardinal directions" << endl;
-  cout << "'inventory' - List the contents of your backpack" << endl;
-  //cout << "'open' - " << endl;
-  cout << "'room' - Give the room description and items it contains" << endl;
-  cout << "'drop (item)' - Leave an item from your backpack in the room" << endl;
-  cout << "'pickup (item)' - Put an item from the room into your backpack" << endl;
-
+  helpCommand();
+  
   //ROOM SETUP
   //creates space on the fly for the string constant that you cannot access  
   room* r0 = new room("Room 0");
@@ -101,7 +97,6 @@ void input(char* command, bool &quit, room* &current, inventory* pack)
 {
   cout << endl << "Command: ";
   cin.getline(command, 80);
-  //cout << "|" << command << "|" << endl;
   int space = -1;
   //split into multiple words
   for (int i = 0; i < strlen(command); i++)
@@ -128,9 +123,18 @@ void input(char* command, bool &quit, room* &current, inventory* pack)
 	{
 	  roomCommand(current);
 	}
+      else if (strcmp(command, "help") == 0)
+	{
+	  helpCommand();
+	}
+      else if (strcmp(command, "hell") == 0)
+	{
+	  cout << "WOOOOOOAAAH-OOHH WE'RE HALF WAY THERE-ER OOOOH-OOOOOOOOH LIIIVING ON A PRAAAAYER-ER" << endl << "NEVA GUNNA GIVE U UP, NEVA GUNNA LET U DOWN, NEVA GUNNA RUN AROUND OR DESERT U." << endl << "BAAAKE ME UP!! BAKE ME UP A PIE! 1/4 CUPS!! OF FLOUR FOR OUR PIE (SAAAVE ME!!) SET THE TEMP AND SAVE ME FROM THE PIE!!  -  curtesy of Aidan Derocher" << endl;
+	}
       else
 	{
 	  cout << "Invalid Command" << endl;
+	  cout << "|" << command << "|" << endl;
 	}
     }
   else//two word
@@ -150,7 +154,11 @@ void input(char* command, bool &quit, room* &current, inventory* pack)
 	      call[i-space - 1] = command[i];
 	    }
 	}
-
+      //cout << "Space|" << space << "|" << endl << "Len|" << strlen(command) << "|" << endl;
+      action[space] = '\0';//add in endline character
+      call[strlen(command) - space - 1] = '\0';
+      
+      //cout << "|" << action << "|" << call << "|" << endl;
       //Pathways
       if (strcmp(action, "go") == 0)
 	{
@@ -168,8 +176,22 @@ void input(char* command, bool &quit, room* &current, inventory* pack)
 	{
 	  cout << "Invalid Command" << endl;
 	}
+      delete action;
+      delete call;
     }
   
+  return;
+}
+
+void helpCommand()
+{
+  cout << "'go' (direction) - Move in one of the cardinal directions" << endl;
+  cout << "'drop (item)' - Leave an item from your backpack in the room" << endl;
+  cout << "'pickup (item)' - Put an item from the room into your backpack" << endl;
+  cout << "'inventory' - List the contents of your backpack" << endl;
+  cout << "'room' - Give the room description and items it contains" << endl;
+  cout << "'help' - List the commands available" << endl;
+  cout << "'quit' - Exit Game" << endl;
   return;
 }
 
@@ -248,6 +270,7 @@ void goToCommand(char* direction, room* &current)
   if (strcmp(direction, "north") == 0 ||
       strcmp(direction, "North") == 0)
     {
+      //test if room exists
       if (current -> exits[0] != NULL)
 	{
 	  dir = 0;
@@ -266,7 +289,7 @@ void goToCommand(char* direction, room* &current)
 	}
       else
 	{
-	  cout << "Direction Unavailabe" << endl;
+	  cout << "Direction Unavailable" << endl;
 	}
     }
   else if (strcmp(direction, "south") == 0 ||
@@ -296,12 +319,26 @@ void goToCommand(char* direction, room* &current)
   else if (strcmp(direction, "down") == 0 ||
       strcmp(direction, "Down") == 0)
     {
-      dir = 5;
+      if (current -> exits[5] != NULL)
+	{
+	  dir = 5;
+	}
+      else
+	{
+	  cout << "Direction Unavailabe" << endl;
+	}
     }
   else if (strcmp(direction, "up") == 0 ||
       strcmp(direction, "Up") == 0)
     {
-      dir = 4;
+      if (current -> exits[4] != NULL)
+	{
+	  dir = 4;
+	}
+      else
+	{
+	  cout << "Direction Unavailabe" << endl;
+	}
     }
   else
     {
