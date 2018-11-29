@@ -19,9 +19,9 @@ class node
 
   //function init
   setData(student* nstudent);
-  getData();
+  student* getData();
   setNext(node* nnode);
-  getNext();
+  node* getNext();
 
   //variable init
   node* next;
