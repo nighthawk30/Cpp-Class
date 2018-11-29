@@ -6,6 +6,8 @@ Header file for student class
 #ifndef STUDENT_H
 #define STUDENT_H
 
+#include <cstring>
+
 class student
 {
  public:

@@ -3,7 +3,7 @@ Nathan Taylor
 Student Class
 */
 
-"student.h"
+#include "student.h"
 
 //create student
 student::student(char* nnameFirst, char* nnameLast, int nstudentID, float ngpa)
