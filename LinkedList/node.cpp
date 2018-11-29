@@ -8,8 +8,10 @@ Node Class
 //create node
 node::node()
 {
-  data = new student*();
-  next = new node*();
+  data = new student();
+  node = new node();
+  data = NULL;
+  next = NULL;
 }
 
 //Data
