@@ -3,38 +3,38 @@ Nathan Taylor
 Node Class
 */
 
-#include "node.h"
+#include "Node.h"
 
 //create node
-node::node()
+Node::Node()
 {
   data = NULL;
   next = NULL;//set to null bc other crap inside - possibly
 }
 
-node::~node()
+Node::~Node()
 {
   delete data;
 }
 
 //Data
-node::setData(student* nstudent)
+Node::setStudent(Student* nstudent)
 {
   data = nstudent;
 }
 
-student* node::getData()
+Student* Node::getStudent()
 {
   return data;
 }
 
 //Node
-node::setNext(node* nnode)
+Node::setNext(Node* nnode)
 {
   next = nnode;
 }
 
-node* node::getNext()
+Node* Node::getNext()
 {
   return next;
 }

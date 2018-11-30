@@ -8,14 +8,14 @@ Header file for student class
 
 #include <cstring>
 
-class student
+class Student
 {
  public:
   //class init
-  student(char* nnameFirst, char* nnameLast, int nstudentID, float ngpa);
+  Student(char* nnameFirst, char* nnameLast, int nstudentID, float ngpa);
 
   //destructor
-  ~student();
+  ~Student();
   
   //var init
   char* nameFirst;

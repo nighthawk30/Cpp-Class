@@ -3,19 +3,19 @@ Nathan Taylor
 11/28/18
 Linked List Class
 */
-#include "node.h"
-#include "student.h"
+#include "Node.h"
+#include "Student.h"
 
-void studentAdd(node* start);
-void printList(node* start);
-void studentDelete(node* start);
+void studentAdd(Node* start);
+void printList(Node* start);
+void studentDelete(Node* start);
 
 int main()
 {
   //linked
   char* command = new char[80];
   bool quit = false;
-  node* start = new node();
+  Node* start = new Node();
   
   cout << "Welcome to the student linkedlist" << endl << endl << "Commands:" << endl;
   cout << "'add' - Add a new student" << endl;
@@ -54,11 +54,11 @@ int main()
   return 0;
 }
 
-void studentAdd(node* start)
+void studentAdd(Node* start)
 {
-  node* spark = new node();
+  Node* spark = new Node();
   //Standard process for walking through link
-  node* last = start;
+  Node* last = start;
   while (last -> getNext() != NULL)
     {
       last = last -> getNext();
@@ -84,7 +84,7 @@ void studentAdd(node* start)
   cout << "GPA: ";
   cin.getline(g, 80);
 
-  student* peer = new student(firstname, lastname, atoi(id), atof(g));
+  Student* peer = new Student(firstname, lastname, atoi(id), atof(g));
 
   spark -> setData(peer);
 
@@ -92,16 +92,16 @@ void studentAdd(node* start)
   
 }
 
-void printList(node* start)
+void printList(Node* start)
 {
-  node* last = start;
+  Node* last = start;
   bool empty = true;
   
   while (last -> getNext() != NULL)
     {
       empty = false;
       last = last -> getNext();
-      student* data = last -> getData();
+      Student* data = last -> getData();
       cout << endl << "First: " << data -> nameFirst << endl << "Last: " << data -> nameLast << endl;
       cout << "ID: " << data -> studentID << endl << "GPA: " << data -> gpa << endl;
     }
@@ -120,8 +120,8 @@ void studentDelete(node* start)
   cin >> stdid;
   cin.ignore();
 
-  node* previous;
-  node* last = start;
+  Node* previous;
+  Node* last = start;
   while (last -> getNext() != NULL)
     {
       previous = last;

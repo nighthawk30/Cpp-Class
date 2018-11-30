@@ -11,22 +11,22 @@ HAVE FUN!
 
 using namespace std;
 
-class node
+class Node
 {
  public:
   //class init
-  node();//sets data and next to null
+  Node();//sets data and next to null
   
   //destructor
-  ~node();//deletes student
+  ~Node();//deletes student
   
   //function init
-  setData(student* nstudent);
-  student* getData();
-  setNext(node* nnode);
-  node* getNext();
+  setStudent(Student* nstudent);
+  Student* getStudent();
+  setNext(Node* nnode);
+  Node* getNext();
   
   //variable init
-  node* next;
-  student* data;
+  Node* next;
+  Student* data;
 };

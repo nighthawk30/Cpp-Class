@@ -3,10 +3,10 @@ Nathan Taylor
 Student Class
 */
 
-#include "student.h"
+#include "Student.h"
 
 //create student
-student::student(char* nnameFirst, char* nnameLast, int nstudentID, float ngpa)
+Student::Student(char* nnameFirst, char* nnameLast, int nstudentID, float ngpa)
 {
   nameFirst = new char[strlen(nnameFirst)];
   strcpy(nameFirst, nnameFirst);
@@ -16,7 +16,7 @@ student::student(char* nnameFirst, char* nnameLast, int nstudentID, float ngpa)
   gpa = ngpa;
 }
 
-student::~student()
+Student::~Student()
 {
   delete nameFirst, nameLast;
 }
