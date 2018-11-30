@@ -27,6 +27,7 @@ int main()
     {
       cout << endl << "Command: ";
       cin.getline(command, 80);
+      //cin.ignore();
       if (strcmp(command, "add") == 0)
 	{
 	  studentAdd(start);
@@ -86,7 +87,7 @@ void studentAdd(Node* start)
 
   Student* peer = new Student(firstname, lastname, atoi(id), atof(g));
 
-  spark -> setData(peer);
+  spark -> setStudent(peer);
 
   cout << endl << "Student Added" << endl;
   
@@ -101,7 +102,7 @@ void printList(Node* start)
     {
       empty = false;
       last = last -> getNext();
-      Student* data = last -> getData();
+      Student* data = last -> getStudent();
       cout << endl << "First: " << data -> nameFirst << endl << "Last: " << data -> nameLast << endl;
       cout << "ID: " << data -> studentID << endl << "GPA: " << data -> gpa << endl;
     }
@@ -112,21 +113,23 @@ void printList(Node* start)
     }
 }
 
-void studentDelete(node* start)
+void studentDelete(Node* start)
 {
   int stdid;
   bool found;
+  char* input = new char[80];
   cout << "Student ID: ";
-  cin >> stdid;
-  cin.ignore();
-
+  cin.getline(input, 80);
+  stdid = atoi(input);
+  delete input;
+  
   Node* previous;
   Node* last = start;
   while (last -> getNext() != NULL)
     {
       previous = last;
       last = last -> getNext();
-      if (last -> getData() -> studentID == stdid)
+      if (last -> getStudent() -> studentID == stdid)
 	{
 	  previous -> setNext(last -> getNext());
 	  delete last;
