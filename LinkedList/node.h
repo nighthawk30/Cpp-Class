@@ -16,13 +16,16 @@ class node
  public:
   //class init
   node();
-
+  
+  //destructor
+  ~node();
+  
   //function init
   setData(student* nstudent);
   student* getData();
   setNext(node* nnode);
   node* getNext();
-
+  
   //variable init
   node* next;
   student* data;

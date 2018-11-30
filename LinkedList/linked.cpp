@@ -17,7 +17,7 @@ int main()
   bool quit = false;
   node* start = new node();
   
-  cout << "Welcome to the student linkedlist" << endl << "Commands:" << endl;
+  cout << "Welcome to the student linkedlist" << endl << endl << "Commands:" << endl;
   cout << "'add' - Add a new student" << endl;
   cout << "'print' - Print out the list of students and their information" << endl;
   cout << "'delete' - Delete a student by their id number" << endl;
@@ -25,21 +25,21 @@ int main()
   
   while (!quit)
     {
-      cout << "Command: ";
+      cout << endl << "Command: ";
       cin.getline(command, 80);
-      if (strcmp(command, "add"))
+      if (strcmp(command, "add") == 0)
 	{
 	  studentAdd(start);
 	}
-      else if (strcmp(command, "print"))
+      else if (strcmp(command, "print") == 0)
 	{
-
+	  printList(start);
 	}
-      else if (strcmp(command, "delete"))
+      else if (strcmp(command, "delete") == 0)
 	{
-	  
+	  studentDelete(start);
 	}
-      else if (strcmp(command, "quit"))
+      else if (strcmp(command, "quit") == 0)
 	{
 	  quit = true;
 	}
@@ -48,6 +48,9 @@ int main()
 	  cout << "Invalid Command" << endl;
 	}
     }
+
+  cout << endl << "Aborted (core dumped)\t\t\t-jk";
+
   return 0;
 }
 
@@ -62,7 +65,7 @@ void studentAdd(node* start)
     }
   //Link last to new node
   last -> setNext(spark);
-
+  
   //Put info into spark node
   char* firstname = new char[80];
   char* lastname = new char[80];
@@ -82,20 +85,59 @@ void studentAdd(node* start)
   cin.getline(g, 80);
 
   student* peer = new student(firstname, lastname, atoi(id), atof(g));
-  cout << peer -> nameFirst << endl;
-  cout << peer -> nameLast << endl;
-  cout << peer -> studentID << endl;
-  cout << peer -> gpa << endl;
 
   spark -> setData(peer);
+
+  cout << endl << "Student Added" << endl;
+  
 }
 
 void printList(node* start)
 {
-
+  node* last = start;
+  bool empty = true;
+  
+  while (last -> getNext() != NULL)
+    {
+      empty = false;
+      last = last -> getNext();
+      student* data = last -> getData();
+      cout << endl << "First: " << data -> nameFirst << endl << "Last: " << data -> nameLast << endl;
+      cout << "ID: " << data -> studentID << endl << "GPA: " << data -> gpa << endl;
+    }
+  
+  if (empty)
+    {
+      cout << endl << "List Empty" << endl;
+    }
 }
 
 void studentDelete(node* start)
 {
+  int stdid;
+  bool found;
+  cout << "Student ID: ";
+  cin >> stdid;
+  cin.ignore();
 
+  node* previous;
+  node* last = start;
+  while (last -> getNext() != NULL)
+    {
+      previous = last;
+      last = last -> getNext();
+      if (last -> getData() -> studentID == stdid)
+	{
+	  previous -> setNext(last -> getNext());
+	  delete last;
+	  found = true;
+	  cout << endl << "Student Deleted" << endl;
+	  break;
+	}
+    }
+  
+  if (!found)
+    {
+      cout << endl << "Student Not Found" << endl;
+    }
 }

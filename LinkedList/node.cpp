@@ -8,10 +8,13 @@ Node Class
 //create node
 node::node()
 {
-  //data = new student();
-  next = new node();
   data = NULL;
-  next = NULL;
+  next = NULL;//set to null bc other crap inside - possibly
+}
+
+node::~node()
+{
+  delete data;
 }
 
 //Data

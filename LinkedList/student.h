@@ -14,6 +14,9 @@ class student
   //class init
   student(char* nnameFirst, char* nnameLast, int nstudentID, float ngpa);
 
+  //destructor
+  ~student();
+  
   //var init
   char* nameFirst;
   char* nameLast;
