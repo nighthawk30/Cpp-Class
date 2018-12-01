@@ -15,8 +15,9 @@ Student::Student(char* nnameFirst, char* nnameLast, int nstudentID, float ngpa)
   studentID = nstudentID;
   gpa = ngpa;
 }
-
+/*
 Student::~Student()
 {
   delete nameFirst, nameLast;
 }
+*/
