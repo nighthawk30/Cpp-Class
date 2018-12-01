@@ -35,7 +35,7 @@ int main()
 	  char* id = new char[80];
 	  char* grade = new char[80];
 
-	  cout <<pri  "First Name: ";
+	  cout << "First Name: ";
 	  cin.getline(first, 80);
 	  cout << "Last Name: ";
 	  cin.getline(last, 80);
