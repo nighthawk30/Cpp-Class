@@ -7,8 +7,9 @@ Linked List Class
 #include "Student.h"
 
 Node* studentAdd(Node* start, Student* peer);
-void printList(Node* start);
 Node* studentDelete(Node* start, int idnum);
+void printList(Node* start);
+void printAverage(Node* start);
 
 int main()
 {
@@ -19,8 +20,9 @@ int main()
   
   cout << "Welcome to the student linkedlist" << endl << endl << "Commands:" << endl;
   cout << "'add' - Add a new student" << endl;
-  cout << "'print' - Print out the list of students and their information" << endl;
   cout << "'delete' - Delete a student by their id number" << endl;
+  cout << "'print' - Print out the list of students and their information" << endl;
+  cout << "'average' - Prints out the average of all the student's grades" << endl;
   cout << "'quit' - exit the program" << endl;
   
   while (!quit)
@@ -48,16 +50,41 @@ int main()
 	  start = studentAdd(start, peer);
 	  cout << endl << "Student Added" << endl;
 	}
-      else if (strcmp(command, "print") == 0)
-	{
-	  cout << endl;
-	  printList(start);
-	}
       else if (strcmp(command, "delete") == 0)
 	{
-	  cout << "Student ID: ";
-	  cin.getline(command, 80);
-	  start = studentDelete(start, atoi(command));
+	  if (start != NULL)
+	    {
+	      cout << "Student ID: ";
+	      cin.getline(command, 80);
+	      start = studentDelete(start, atoi(command));
+	    }
+	  else
+	    {
+	      cout << endl << "List Empty" << endl;
+	    }
+	}
+      else if (strcmp(command, "print") == 0)
+	{
+	  if (start != NULL)
+	    {   
+	      cout << endl;
+	      printList(start);
+	    }
+	  else
+	    {
+	      cout << endl << "List Empty" << endl;
+	    }
+	}
+      else if (strcmp(command, "average") == 0)
+	{
+	  if (start != NULL)
+	    {
+	      printAverage(start);
+	    }
+	  else
+	    {
+	      cout << endl << "List Empty" << endl;
+	    }
 	}
       else if (strcmp(command, "quit") == 0)
 	{
@@ -72,6 +99,21 @@ int main()
   cout << endl << "Aborted (core dumped)\t\t\t-jk";
 
   return 0; 
+}
+
+void printAverage(Node* start)
+{
+  float avg = start -> getStudent() -> gpa;
+  int counter = 1;
+  Node* index = start;
+  while (index -> getNext() != NULL)
+    {
+      index = index -> getNext();
+      avg += index -> getStudent() -> gpa;
+      counter++;
+    }
+  cout << endl << "Average: " << (avg/counter) << endl;
+  return;
 }
 
 Node* studentAdd(Node* start, Student* peer)
@@ -114,31 +156,19 @@ Node* studentAdd(Node* start, Student* peer)
 
 void printList(Node* start)
 {
-  if (start == NULL)//empty list
-    {
-      cout << "List Empty" << endl;
-    }
-  else
-    {
-      Student* data = start -> getStudent();
-      cout << data -> nameFirst << " " << data -> nameLast << ", " << data -> studentID << ", " << data -> gpa << endl;
+  Student* data = start -> getStudent();
+  cout << data -> nameFirst << " " << data -> nameLast << ", " << data -> studentID << ", " << data -> gpa << endl;
 
-      //if there is a next node
-      if (start -> getNext() != NULL)
-	{
-	  printList(start -> getNext());
-	}
+  //if there is a next node
+  if (start -> getNext() != NULL)
+    {
+      printList(start -> getNext());
     }
-  
 }
 
 Node* studentDelete(Node* start, int idnum)
 {
-  if (start == NULL)
-    {
-      cout << endl << "List Empty" << endl;
-    }
-  else if (start -> getStudent() -> studentID == idnum)//first item in the list - only occurs the first time
+  if (start -> getStudent() -> studentID == idnum)//first item in the list - only occurs the first time
     {
       Node* top = NULL;
       if (start -> getNext() != NULL)//not the only item in the list
@@ -174,7 +204,7 @@ Node* studentDelete(Node* start, int idnum)
 	}
       else//was not found in this iteration
 	{
-	  studentDelete(start, idnum);
+	  studentDelete(start -> getNext(), idnum);
 	}
     }
   else//last item in the list
