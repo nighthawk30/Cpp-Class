@@ -5,6 +5,7 @@ Linked List Class
 */
 #include "Node.h"
 #include "Student.h"
+//#include <cstdlib>
 
 Node* studentAdd(Node* start, Student* peer);
 Node* studentDelete(Node* start, int idnum);
@@ -48,7 +49,7 @@ int main()
 
 	  Student* peer = new Student(first, last, atoi(id), atof(grade));	  
 	  start = studentAdd(start, peer);
-	  cout << endl << "Student Added" << endl;
+	  cout << endl << "\033[32mStudent Added\033[0m" << endl;//ansi escape code
 	}
       else if (strcmp(command, "delete") == 0)
 	{
@@ -175,8 +176,9 @@ Node* studentDelete(Node* start, int idnum)
 	{
 	  top = start -> getNext();
 	}
-      delete start;
       
+      delete start;
+      cout << "\033[A\33[2K";//ansi escape code for deleting back a line
       cout << endl << "Student Deleted" << endl;
 
       //either a new empty top or the next node
