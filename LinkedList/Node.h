@@ -6,16 +6,10 @@
 
 using namespace std;
 
-void setup()
-{
-  cout << "\033[8m";
-}
-
 class Node{
  public:
   Node(Student* newvalue);
   ~Node();
-  setup();
   Node* getNext();
   Student* getStudent();
   void setNext(Node* newnext);
