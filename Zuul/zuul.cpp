@@ -358,9 +358,39 @@ void goToCommand(char* direction, room* &current)
 //print the contents of the room
 void roomCommand(room* current)
 {
-  cout << current -> descript << ":";
+  cout << current -> descript << endl;
+  cout << "Exits: ";
+  for (int i = 0; i < 6; i++)
+    {
+      if (current -> exits[i] != NULL)
+	{
+	  switch(i)
+	    {
+	    case 0:
+	      cout << "north ";
+	      break;
+	    case 1:
+	      cout << "east ";
+	      break;
+	    case 2:
+	      cout << "south ";
+	      break;
+	    case 3:
+	      cout << "west ";
+	      break;
+	    case 4:
+	      cout << "up ";
+	      break;
+	    case 5:
+	      cout << "down ";
+	      break;
+	    }
+	}
+    }
+  cout << endl;
   vector <char*>* crate = current -> storage;
   vector <char*>::iterator it;
+  cout << "Items:";
   for (it = crate -> begin(); it != crate -> end(); it++)
     {
       cout << " " << *it;
