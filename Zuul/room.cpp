@@ -13,18 +13,19 @@ room::room(char* ndescript)
   storage = new vector <char*>();//set up storage
 }
 
-room::createStorage(char* nitem)
+room::addStorage(char* nitem)
 {
-  char* item = new char[strlen(nitem)];
+  char* item = new char[strlen(nitem)+1];
   strcpy(item, nitem);
+  item[strlen(nitem)] = '\0';
   storage -> push_back(item);
 }
-
+/*
 //add an item to the room
 room::addStorage(char* item)
 {
   storage -> push_back(item);
-}
+  }*/
 //test if an item exists in the room
 int room::findStorage(char* item)
 {

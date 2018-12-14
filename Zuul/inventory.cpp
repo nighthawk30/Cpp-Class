@@ -9,11 +9,18 @@ inventory::inventory()
 {
   backpack = new vector <char*>();
 }
+/*
+inventory::addInventory(char* item)
+{
+  backpack -> push_back(item);
+}
+*/
 //add an item to your inventory
 inventory::addInventory(char* nitem)
 {
-  char* item = new char[strlen(nitem)];
+  char* item = new char[strlen(nitem)+1];
   strcpy(item, nitem);
+  item[strlen(nitem)] = '\0';
   backpack -> push_back(item);
 }
 //test if an item is in your inventory

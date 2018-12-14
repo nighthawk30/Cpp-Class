@@ -17,7 +17,8 @@ class inventory
   inventory();
 
   //function init
-  addInventory(char* nitem);
+  addInventory(char* item);
+  createInventory(char* nitem);
   findInventory(char* item);
 
   //var init
