@@ -12,6 +12,14 @@ room::room(char* ndescript)
   strcpy(descript, ndescript);//copy the description into the room
   storage = new vector <char*>();//set up storage
 }
+
+room::createStorage(char* nitem)
+{
+  char* item = new char[strlen(nitem)];
+  strcpy(item, nitem);
+  storage -> push_back(item);
+}
+
 //add an item to the room
 room::addStorage(char* item)
 {

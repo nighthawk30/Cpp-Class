@@ -20,6 +20,7 @@ class room
 
   //function init
   setDescription(char* ndescript);
+  createStorage(char* nitem);
   addStorage(char* item);
   findStorage(char* item);
   setExits(room* ndestin1, room* ndestin2, room* ndestin3, room* ndestin4, room* ndestin5, room* ndestin6);
