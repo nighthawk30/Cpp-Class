@@ -49,16 +49,31 @@ void printTree(Node* root);
 int main()
 {
   Node* start = NULL;
-  start = addLeaf(start, 10);
-  start = addLeaf(start, 6);
-  start = addLeaf(start, 7);
-  start = addLeaf(start, 11);
-  start = addLeaf(start, 3);
-  start = addLeaf(start, 30);
-  start = addLeaf(start, 35);
-  start = addLeaf(start, 15);
-  start = addLeaf(start, 12);
-  printTree(start);
+  char* input = new char[80];
+
+  while(strcmp(input, "quit") != 0)
+    {
+      cout << endl << "Command: ";
+      cin.getline(input, 80);
+
+      if (strcmp(input, "add") == 0)
+	{
+	  cout << "Index: ";
+	  cin.getline(input, 80);
+	  start = addLeaf(start, atoi(input));
+	  cout << endl << "Node Added" << endl;
+	}
+      else if (strcmp(input, "print") == 0)
+	{
+	  cout << endl;
+	  printTree(start);
+	}
+      else if (strcmp(input, "quit") != 0)
+	{
+	  cout << "Invalid Command" << endl;
+	}
+    }
+  cout << endl << "Aborted (core dumped)\t\t\t-jk";
   return 0;
 }
 
@@ -67,18 +82,22 @@ void printTree(Node* root)
   if (root != NULL)
     {
       cout << root -> getIndex() << endl;
-    }
+      
+      if (root -> getLeft() != NULL)
+	{
+	  cout << "/" << endl;
+	  printTree(root -> getLeft());
+	}
 
-  if (root -> getLeft() != NULL)
-    {
-      cout << "/" << endl;
-      printTree(root -> getLeft());
+      if (root -> getRight() != NULL)
+	{
+	  cout << "\\" << endl;
+	  printTree(root -> getRight());
+	}
     }
-
-  if (root -> getRight() != NULL)
+  else
     {
-      cout << "\\" << endl;
-      printTree(root -> getRight());
+      cout << endl << "Tree Empty" << endl;
     }
   return;
 }

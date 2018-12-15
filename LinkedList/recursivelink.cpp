@@ -97,7 +97,7 @@ int main()
 	}
     }
 
-  cout << endl << "Aborted (core dumped)\t\t\t-jk";
+   cout << endl << "Aborted (core dumped)\t\t\t-jk";
 
   return 0; 
 }
