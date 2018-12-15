@@ -43,7 +43,7 @@ public:
 };
 
 Node* addLeaf(Node* root, int nindex);
-void printTree(Node* root);
+void printTree(Node* root, int level, int direction);//0 - left; 1 - none; 2 - Right
 void printCommands();
 
 int main()
@@ -66,7 +66,7 @@ int main()
       else if (strcmp(input, "print") == 0)
 	{
 	  cout << endl;
-	  printTree(start);
+	  printTree(start, -1, 1);
 	}
       else if (strcmp(input, "help") == 0)
 	{
@@ -95,20 +95,40 @@ void printCommands()
   cout << "'quit' - Exit the program" << endl;
 }
 
-void printTree(Node* root)
+void printTree(Node* root, int level, int direction)
 {
+  //cout << level << endl;
   if (root != NULL)
     {
+      if (root -> getRight() != NULL)
+	{ 
+	  printTree(root -> getRight(), level + 1, 0);
+	}
+
+      //branch direction
+      if (direction == 0)//more than first and to the left
+	{
+	  for (int i = 0; i < level; i++)
+	    {
+	      cout << "   ";
+	    }
+	  cout << " / ";
+	}
+      else if (direction == 2)//more than first and to the right
+	{
+	  for (int i = 0; i < level; i++)
+	    {
+	      cout << "   ";
+	    }
+	  cout << " \\ ";
+	}
+      
+      //print
       cout << root -> getIndex() << endl;
+
       if (root -> getLeft() != NULL)
 	{
-	  cout << "/" << endl;
-	  printTree(root -> getLeft());
-	}
-      if (root -> getRight() != NULL)
-	{
-	  cout << "\\" << endl;
-	  printTree(root -> getRight());
+	  printTree(root -> getLeft(), level + 1, 2);
 	}
     }
   else
