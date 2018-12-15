@@ -44,7 +44,7 @@ public:
 };
 
 Node* addLeaf(Node* root, int nindex);
-void searchTree(Node* root, int search);
+void printTree(Node* root);
 
 int main()
 {
