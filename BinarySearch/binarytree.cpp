@@ -50,7 +50,7 @@ int main()
 {
   Node* start = NULL;
   char* input = new char[80];
-  cout << "\033[4mBinary Search Tree\033[0m" << endl << endl << "Commands:" << endl;
+  cout << endl << "\033[4mBinary Search Tree\033[0m" << endl << "Commands:" << endl;
   printCommands();
   while(true)
     {
