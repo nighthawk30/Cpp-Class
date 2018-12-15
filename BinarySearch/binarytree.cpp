@@ -42,9 +42,11 @@ public:
   }
 };
 
-Node* addLeaf(Node* root, int nindex);
+Node* insertNode(Node* root, int nindex);
 void printTree(Node* root, int level, int direction);//0 - left; 1 - none; 2 - Right
 void printCommands();
+Node* findNode(Node* root, int index);
+Node* deleteNode(Node* strip, int index);
 
 int main()
 {
@@ -60,7 +62,7 @@ int main()
 	{
 	  cout << "Index: ";
 	  cin.getline(input, 80);
-	  start = addLeaf(start, atoi(input));
+	  start = insertNode(start, atoi(input));
 	  cout << endl << "Node Added" << endl;
 	}
       else if (strcmp(input, "print") == 0)
@@ -73,6 +75,13 @@ int main()
 	  cout << endl;
 	  printCommands();
 	}
+      else if (strcmp(input, "delete") == 0)
+	{
+	  cout << "Index: ";
+	  cin.getline(input, 80);
+	  start = deleteNode(start, atoi(input));
+	  //cout << endl << "Node Deleted" << endl;
+	}
       else if (strcmp(input, "quit") == 0)
 	{
 	  break;
@@ -84,6 +93,52 @@ int main()
     }
   cout << endl << "Aborted (core dumped)\t\t\t-jk";
   return 0;
+}
+
+Node* findNode(Node* root, int index)
+{
+  if (root != NULL)
+    {
+      //is current
+      if (root -> getIndex() == index)
+	{
+	  return root;
+	}
+      else
+	{
+	  //test right
+	  if (root -> getRight() != NULL)
+	    {
+	      root = findNode(root -> getRight(), index);
+	    }
+	  //test left
+	  if (root -> getLeft() != NULL)
+	    {
+	      root = findNode(root -> getLeft(), index);
+	    }
+	  
+	  if (root -> getIndex() == index)
+	    {
+	      return root;
+	    }
+	}
+    }
+  else
+    {
+      cout << endl << "Tree Empty" << endl;
+    }
+  
+  return root;
+}
+
+Node* deleteNode(Node* root, int index)
+{
+  Node* strip = findNode(root, index);
+  if (strip != NULL)
+    {
+      cout << strip -> getIndex() << endl;
+    }
+  return root;
 }
 
 void printCommands()
@@ -139,7 +194,7 @@ void printTree(Node* root, int level, int direction)
 }
 
 //recursive add function
-Node* addLeaf(Node* root, int nindex)
+Node* insertNode(Node* root, int nindex)
 {
   //if the current node is null - first
   if (root == NULL)
@@ -151,7 +206,7 @@ Node* addLeaf(Node* root, int nindex)
     {
       if (root -> getLeft() != NULL)//recurse
 	{
-	  addLeaf(root -> getLeft(), nindex);
+	  insertNode(root -> getLeft(), nindex);
 	}
       else//position found
 	{
@@ -164,7 +219,7 @@ Node* addLeaf(Node* root, int nindex)
     {
       if (root -> getRight() != NULL)//recurse
 	{
-	  addLeaf(root -> getRight(), nindex);
+	  insertNode(root -> getRight(), nindex);
 	}
       else//position found
 	{
