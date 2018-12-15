@@ -3,7 +3,6 @@ Nathan Taylor
 Binary Search Tree and Visualizer
 12/14/
 */
-
 #include <cstdlib>
 #include <iostream>
 #include <cstring>
@@ -45,17 +44,18 @@ public:
 
 Node* addLeaf(Node* root, int nindex);
 void printTree(Node* root);
+void printCommands();
 
 int main()
 {
   Node* start = NULL;
   char* input = new char[80];
-
-  while(strcmp(input, "quit") != 0)
+  cout << "\033[4mBinary Search Tree\033[0m" << endl << endl << "Commands:" << endl;
+  printCommands();
+  while(true)
     {
       cout << endl << "Command: ";
       cin.getline(input, 80);
-
       if (strcmp(input, "add") == 0)
 	{
 	  cout << "Index: ";
@@ -68,13 +68,31 @@ int main()
 	  cout << endl;
 	  printTree(start);
 	}
-      else if (strcmp(input, "quit") != 0)
+      else if (strcmp(input, "help") == 0)
 	{
-	  cout << "Invalid Command" << endl;
+	  cout << endl;
+	  printCommands();
+	}
+      else if (strcmp(input, "quit") == 0)
+	{
+	  break;
+	}
+      else
+	{
+	  cout << "Invalid Command" << endl;    
 	}
     }
   cout << endl << "Aborted (core dumped)\t\t\t-jk";
   return 0;
+}
+
+void printCommands()
+{
+  cout << "'add' - Add a node to the tree" << endl;
+  cout << "'delete' - Remove a node from the tree" << endl;
+  cout << "'print' - Print out the tree structure" << endl;
+  cout << "'help' - Print out the list of commands" << endl;
+  cout << "'quit' - Exit the program" << endl;
 }
 
 void printTree(Node* root)
@@ -82,13 +100,11 @@ void printTree(Node* root)
   if (root != NULL)
     {
       cout << root -> getIndex() << endl;
-      
       if (root -> getLeft() != NULL)
 	{
 	  cout << "/" << endl;
 	  printTree(root -> getLeft());
 	}
-
       if (root -> getRight() != NULL)
 	{
 	  cout << "\\" << endl;
@@ -97,7 +113,7 @@ void printTree(Node* root)
     }
   else
     {
-      cout << endl << "Tree Empty" << endl;
+      cout << "Tree Empty" << endl;
     }
   return;
 }
