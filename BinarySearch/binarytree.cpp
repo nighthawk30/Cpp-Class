@@ -62,7 +62,7 @@ public:
 };
 
 Node* addLeaf(Node* root, int nindex, char* ndata);
-void treeSearch(Node* root, int search);
+void searchTree(Node* root, int search);
 void printTree(Node* root);//level is the current height
 
 int main()
@@ -102,7 +102,7 @@ void printTree(Node* root)
   return;
 }
 
-void treeSearch(Node* root, int search)
+void searchTree(Node* root, int search)
 {
   
   //if the current node is null - first
@@ -118,7 +118,7 @@ void treeSearch(Node* root, int search)
     {
       if (root -> getLeft() != NULL)//recurse
 	{
-	  treeSearch(root -> getLeft(), search);
+	  searchTree(root -> getLeft(), search);
 	}
       else//DNE
 	{
@@ -129,7 +129,7 @@ void treeSearch(Node* root, int search)
     {
       if (root -> getRight() != NULL)//recurse
 	{
-	  treeSearch(root -> getRight(), search);
+	  searchTree(root -> getRight(), search);
 	}
       else//DNE
 	{
