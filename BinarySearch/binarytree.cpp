@@ -99,24 +99,24 @@ Node* findNode(Node* root, int index)
 {
   if (root != NULL)
     {
-      //is current
       if (root -> getIndex() == index)
 	{
 	  return root;
 	}
-      else
+
+      if (root -> getRight() != NULL)
 	{
-	  //test right
-	  if (root -> getRight() != NULL)
+	  root = findNode(root -> getRight(), index);
+      
+	  if (root -> getIndex() == index)
 	    {
-	      root = findNode(root -> getRight(), index);
+	      return root;
 	    }
-	  //test left
-	  if (root -> getLeft() != NULL)
-	    {
-	      root = findNode(root -> getLeft(), index);
-	    }
-	  
+	}
+      else if (root -> getLeft() != NULL)
+	{
+	  root = findNode(root -> getLeft(), index);
+
 	  if (root -> getIndex() == index)
 	    {
 	      return root;
@@ -138,6 +138,11 @@ Node* deleteNode(Node* root, int index)
     {
       cout << strip -> getIndex() << endl;
     }
+  //DNE
+  //if it is the first - root is NULL
+  //if it has no leafs: it is a leaf - can be deleted
+  //if it has one branch, just connect the broken branch to the end of the higher part
+  //if it has two branches, go left one and right until you hit the end replace the missing branch with the new node: brake previous pointer to it and point to what previous node was pointing to and have branch above point to it
   return root;
 }
 
